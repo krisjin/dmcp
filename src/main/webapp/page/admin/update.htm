@@ -1,0 +1,77 @@
+<#assign menu="system"> <#assign submenu="update_admin"> <#include
+"/system/head.htm">
+<style type="text/css">
+</style>
+
+<div class="content">
+	<ul class="breadcrumb">
+		<li class="active"><span>个人信息设置 </span></li>
+	</ul>
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="block span12" style="height: 400px;">
+				<p class="block-heading">修改个人信息</p>
+				<div class="block-body">
+					<form id="update_admin_form" method="post" class="form-horizontal"
+						autocomplete="off" action="${basePath}/admin/admin/update.json">
+						<fieldset>
+							<input type="hidden" class="form-control" name="adminId"
+								value="${admin.adminId}">
+							<div class="form-group">
+								<label>管理员名称</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="adminName" value="${admin.name}" placeholder="管理员名称" id="adminName" required>
+								</div>
+							</div>
+							<div class="form-group">
+								<label>电子邮箱</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="email"	value="${admin.email}" placeholder="电子邮箱" id="email" required>
+								</div>
+							</div>
+							<div class="form-group">
+								<label>密码</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="password" value="" placeholder="密码" id="password" required>
+								</div>
+							</div>
+							<div class="form-group">
+								<label>状态</label>
+								<div class="col-sm-10">
+									<input type="radio" name="status" value="normal"<#if
+									admin.status=="normal">checked="checked"</#if>/>正常 <input
+										type="radio" name="status" value="freeze"<#if
+									admin.status=="freeze">checked="checked"</#if>/>冻结
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 col-sm-2 control-label"></label>
+								<button class="btn btn-danger" type="submit">修改</button>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--main content end-->
+<script type="text/javascript">
+	$(function() {
+		$("#update_adminId").hide();
+		$('#update_admin_form').ajaxForm({
+			dataType : 'json',
+			success : function(data) {
+				if (data.result) {
+					bootbox.alert("保存成功，将刷新页面", function() {
+						window.location.reload();
+					});
+				} else {
+					showErrors($('#update_admin_form'), data.errors);
+				}
+			}
+		});
+	});
+</script>
+<#include "/system/foot.htm">

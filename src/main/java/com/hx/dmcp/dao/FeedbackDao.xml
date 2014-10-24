@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hx.dmcp.dao.FeedbackDao">
+	<insert id="addFeedback" parameterType="com.hx.dmcp.entity.Feedback">
+		insert into feedback(name,email,phone,content,createDate) values (#{name},#{email},#{phone},#{content},#{createDate})
+		<selectKey resultType="long" keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<delete id="deleteFeedback" parameterType="long">
+		delete from feedback where id=#{id}
+	</delete>
+	
+	<update id="updateFeedback" parameterType="com.hx.dmcp.entity.Feedback">
+		update feedback set name=#{name}, eamil=#{eamil},phone=#{phone},content=#{content},createDate=#{createDate} where id=#{id}
+	</update>
+		
+	<select id="getFeedback" resultType="com.hx.dmcp.entity.vo.FeedbackVo">
+		select * from feedback limit #{offset},#{rows}
+	</select>
+	
+	<select id="getAllCounts" resultType="int">
+		select count(*) from feedback
+	</select>
+</mapper>  

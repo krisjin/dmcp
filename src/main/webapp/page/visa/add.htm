@@ -1,0 +1,156 @@
+<#assign menu="folder"> 
+<#assign submenu="add_folder"> 
+<#include "/system/head.htm">
+
+<script>
+	var editor;
+	KindEditor.ready(function(K) {
+		editor = K.create('textarea[name="content"]', {
+			allowFileManager : true,
+			items : [ 'source', 'code', 'justifyleft', 'justifycenter',
+					'justifyright', 'insertorderedlist', 'insertunorderedlist',
+					'clearhtml', 'quickformat', 'formatblock', 'fontname',
+					'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+					'italic', 'underline', 'lineheight', 'removeformat', '|',
+					'image','insertfile', 'table', 'hr',
+					'emoticons', 'baidumap', 'link', 'unlink', 'fullscreen' ]
+		});
+	});
+</script>
+<div class="content">
+ <ul class="breadcrumb">
+            <li ><a href="${request.contextPath}/admin/visa/list.htm">签证列表 </a><span class="divider">/</span></li>
+            <#if flag =="update">
+            <li class="active">更新签证</li>
+            <#else>
+            <li class="active">添加签证</li>
+            </#if>
+            
+  </ul>
+	<div class="container-fluid">
+		<#if flag=="update">
+		<form action="${basePath}/admin/visa/updateSave.htm" method="post" enctype="multipart/form-data" id="visa">
+			<input type="hidden" name="id" value="${visa.id}">
+			<div class="row-fluid">
+				<div class="block">
+					<p class="block-heading">更新签证</p>
+					<div class="row-fluid">
+						<div class="block-body" style="min-height: 640px;height:auto;   margin-top: 10px;">
+							<div class="input-prepend">
+								<span class="add-on">&nbsp;标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;题&nbsp;</span>
+								<input class="span3" id="title" value="${visa.title}" name="title" type="text" required>
+								<span class="add-on" style="margin-left:150px;">签证类型</span>
+								 <select name="visaType" id="visaType" class="span3" required>
+								 	<option value="1" <#if visa.visaType==1>selected="selected"</#if>>商务签证</option>
+								 	<option value="2" <#if visa.visaType==2>selected="selected"</#if>>旅游签证</option>
+								 	<option value="3" <#if visa.visaType==3>selected="selected"</#if>>探亲访友签证</option>
+								 </select>
+								 
+							</div>
+							<div class="input-prepend" style="margin-top: 12px;margin-bottom: 12px;">
+								<span class="add-on">签证费用</span> <input class="span3" id="cost" name="cost" type="text" value="${visa.cost}" required>
+								<span class="add-on" style="margin-left:150px;">受理时间</span> <input class="span3" id="handleDate" value="${visa.handleDate}" name="handleDate" type="text" required>
+							</div>
+							
+							<div class="input-prepend">
+								<span class="add-on">费用说明</span> <input class="span3" id="costDescription" value="${visa.costDescription}" name="costDescription" type="text" required>
+								<span class="add-on" style="margin-left:150px;">受理人群</span> <input class="span3" value="${visa.acceptPeople}" id="acceptPeople" name="acceptPeople" type="text" required>
+							</div>
+							
+							<div class="input-prepend" style="margin-top: 12px;margin-bottom: 12px;">
+								<span class="add-on">国旗图片</span>
+								<input id="lefile" type="file" style="display:none" name="file">
+							    <input id="photoCover" class="span3" type="text" required>
+							    <a class="btn" onclick="$('input[id=lefile]').click();">选择图片</a>
+								<script type="text/javascript">
+									$('input[id=lefile]').change(function() {
+									   $('#photoCover').val($(this).val());
+									});
+								</script>
+								
+								<span class="add-on" style="margin-left:65px;">签证类别</span>
+								<select name="category" class="span3" required>
+									<#list visaItem.list as item>
+										<option value="${item.id}"  <#if item.id==visa.category>selected="selected"</#if>>${item.name}</option>
+									</#list>								
+								</select>
+							</div>
+							
+							<div class="input-prepend">
+								<span class="add-on" style="">签证内容</span>
+								<textarea class="span8" style="height: 396px;width:750px;visibility: false;float: left;" id="content" name="content" required><#if visa.content?exists>${visa.content}</#if></textarea>
+							</div>
+							<div style="margin-top: 12px;margin-bottom: 12px;">
+								<input type="submit" value="修改" class="btn btn-danger" >
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		
+		<#else>
+		
+		<form action="${basePath}/admin/visa/save.htm" method="post" enctype="multipart/form-data" id="visa2">
+			<div class="row-fluid">
+				<div class="block">
+					<p class="block-heading">添加签证</p>
+					<div class="row-fluid">
+						<div class="block-body" style="min-height: 640px;height:auto;   margin-top: 10px;">
+							<div class="input-prepend">
+								<span class="add-on">&nbsp;标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;题&nbsp;</span> 
+								<input class="span3" id="title" name="title" type="text" required>
+								<span class="add-on" style="margin-left:150px;">签证类型</span>
+								 <select name="visaType" id="visaType" class="span3" required>
+								 	<option value="1">商务签证</option>
+								 	<option value="2">旅游签证</option>
+								 	<option value="3">探亲访友签证</option>
+								 </select>
+								 
+							</div>
+							<div class="input-prepend" style="margin-top: 12px;margin-bottom: 12px;">
+								<span class="add-on">签证费用</span> <input class="span3" id="cost" name="cost" type="text" required>
+								<span class="add-on" style="margin-left:150px;">受理时间</span> <input class="span3" id="handleDate" name="handleDate" type="text" required>
+							</div>
+							
+							<div class="input-prepend">
+								<span class="add-on">费用说明</span> <input class="span3" id="costDescription" name="costDescription" type="text" required>
+								<span class="add-on" style="margin-left:150px;">受理人群</span> <input class="span3" id="acceptPeople" name="acceptPeople" type="text" required>
+							</div>
+							
+							<div class="input-prepend" style="margin-top: 12px;margin-bottom: 12px;">
+								<span class="add-on">国旗图片</span>
+								<input id="lefile" type="file" style="display:none" name="file">
+							    <input id="photoCover" class="span3" type="text" required>
+							    <a class="btn" onclick="$('input[id=lefile]').click();">选择图片</a>
+								<script type="text/javascript">
+									$('input[id=lefile]').change(function() {
+									   $('#photoCover').val($(this).val());
+									});
+								</script>
+								
+								<span class="add-on" style="margin-left:65px;">签证类别</span>
+								<select name="category" class="span3" required>
+									<#list visaItem.list as item>
+										<option value="${item.id}" >${item.name}</option>
+									</#list>								
+								</select>
+							</div>
+							
+							<div class="input-prepend">
+								<span class="add-on" style="">签证内容</span>
+								<textarea class="span8" style="height: 396px;width:750px;visibility: false;float: left;" id="content" name="content" required></textarea>
+							</div>
+							<div style="margin-top: 12px;margin-bottom: 12px;">
+								<input type="submit" value="提交" class="btn btn-danger" >
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		</#if>
+	</div>
+</div>
+
+<#include "/system/foot.htm">

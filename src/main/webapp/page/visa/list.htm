@@ -1,0 +1,61 @@
+<#assign menu="folder">
+<#assign submenu="add_folder">
+<#include "/system/head.htm">
+
+<div class="content">
+ <ul class="breadcrumb">
+            <li class="active"><span >签证列表 </span><span class="divider">/</span></li>
+            <li ><a href="add.htm">添加签证</a></li>
+  </ul>
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="row-fluid">
+				<div class="block span12">
+					<p class="block-heading">签证类别列表</p>
+					<div class="block-body" >
+						<table class="table table-hover">
+			              <thead>
+			                <tr>
+			                  <th>标题</th>
+			                  <th>签证类型</th>
+			                  <th>签证费用</th>
+			                  <th>受理时间</th>
+			                  <th>费用说明</th>
+			                  <th>签证类别</th>
+			                  <th>操作</th>
+			                </tr>
+			              </thead>
+			              <tbody>
+			              	<#list pageVo.list as visa>
+			                <tr  style="font-size: 12px;">
+			                  <td>${visa.title}</td>
+			                  <td>
+				                  <#if visa.visaType==1>
+				                  	商务签证
+				                  <#elseif visa.visaType==2>
+				                  	旅游签证
+				                  <#else>
+				                   	探亲访友签证	
+				                  </#if>
+			                  </td>
+			                  <td>${visa.cost}</td>
+			                  <td>${visa.handleDate}</td>
+			                  <td>${visa.costDescription}</td>
+			                  <td>${visa.categoryName}</td>
+			                  <td><a href="${basePath}/admin/visa/update.htm?id=${visa.id}">修改</a>&nbsp;|&nbsp;<a href="${basePath}/admin/vc/delete.htm?id=${visa.id}">删除</a></td>
+			                </tr>
+			               </#list>
+			              </tbody>
+			            </table>
+					</div>
+					<div style="height: 60px;margin-bottom:20px;margin-left: 10px;">
+				     <div class="pagination">${pageVo.pageNumHtml}</div>
+				    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<#include "/system/foot.htm">
