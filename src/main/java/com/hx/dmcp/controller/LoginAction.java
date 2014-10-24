@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.hx.dmcp.constant.SystemConstant;
 import com.hx.dmcp.constant.ValidateInfoConstant;
 import com.hx.dmcp.entity.vo.JsonVo;
@@ -27,8 +26,6 @@ import com.hx.dmcp.util.HttpUtils;
 @RequestMapping("/auth/admin")
 public class LoginAction extends BaseAction {
 
-	@Autowired
-	private DefaultKaptcha captchaProducer;
 
 	@Autowired
 	private AdminService adminService;
