@@ -30,7 +30,7 @@ public class VisaItemAction {
 
 		PageVo<VisaItem> visas = visaItemServcie.getVisaItemWithPage(1);
 		model.put("visas", visas);
-		return "system/vc/add";
+		return "page/vc/add";
 	}
 
 	@RequestMapping(value = "/save.htm", method = RequestMethod.POST)
@@ -53,7 +53,7 @@ public class VisaItemAction {
 		PageVo<VisaItem> page = visaItemServcie.getVisaItemWithPage(1);
 		model.put("pageVo", page);
 		model.put("flag", "query");
-		return "system/vc/list";
+		return "page/vc/list";
 	}
 
 	@RequestMapping(value = "/update.htm", method = RequestMethod.GET)
@@ -63,7 +63,7 @@ public class VisaItemAction {
 		model.put("pageVo", page);
 		model.put("flag", "update");
 		model.put("vi", vi);
-		return "system/vc/list";
+		return "page/vc/list";
 	}
 
 	@RequestMapping(value = "/updateSave.htm", method = RequestMethod.POST)
