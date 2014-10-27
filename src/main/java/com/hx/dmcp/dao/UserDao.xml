@@ -25,10 +25,10 @@
 	</select>
 	
 	<select id="getUserById" parameterType="long" resultType="com.hx.dmcp.entity.User">
-		select * from user where adminId=#{userId}
+		select * from user where userId=#{userId}
 	</select>
 	
-	<select id="getUserByEmail" resultType="com.hx.dmcp.entity.vo.UserVo">
+	<select id="getUserByEmail" resultType="com.hx.dmcp.entity.User">
 		select * from user where email=#{email}
 	</select>
 

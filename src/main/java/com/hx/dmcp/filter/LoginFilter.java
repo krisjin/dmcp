@@ -34,7 +34,7 @@ public class LoginFilter implements Filter {
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-		User user = (User) request.getSession().getAttribute(SystemConstant.SESSION_ADMIN);
+		User user = (User) request.getSession().getAttribute(SystemConstant.USER_SESSION);
 
 		if (user == null) {
 			String path = request.getContextPath();

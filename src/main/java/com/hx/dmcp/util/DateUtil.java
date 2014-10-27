@@ -13,11 +13,10 @@ import java.util.TimeZone;
 /**
  * @author krisjin
  */
-public abstract class DateHelper {
+public abstract class DateUtil {
 
 	public static final long millisInDay = 86400000;
 
-	// a bunch of date formats
 	private static final String formatDefaultDate = "dd.MM.yyyy";
 	private static final String formatDefaultDateMinimal = "d.M.yy";
 	private static final String formatDefaultTimestamp = "yyyy-MM-dd HH:mm:ss.SSS";
@@ -309,7 +308,7 @@ public abstract class DateHelper {
 
 	// convenience method returns minimal date format
 	public static SimpleDateFormat defaultDateFormat() {
-		return DateHelper.friendlyDateFormat(true);
+		return DateUtil.friendlyDateFormat(true);
 	}
 
 	// convenience method returns minimal date format
@@ -381,11 +380,11 @@ public abstract class DateHelper {
 
 	// convenience method using minimal date format
 	public static String minimalDate(Date date) {
-		return format(date, DateHelper.minimalDateFormat());
+		return format(date, DateUtil.minimalDateFormat());
 	}
 
 	public static String fullDate(Date date) {
-		return format(date, DateHelper.fullDateFormat());
+		return format(date, DateUtil.fullDateFormat());
 	}
 
 	/**
@@ -451,8 +450,8 @@ public abstract class DateHelper {
 	public static Date parseWeblogURLDateString(String dateString, TimeZone tz, Locale locale) {
 
 		Date ret = new Date();
-		SimpleDateFormat char8DateFormat = DateHelper.get8charDateFormat();
-		SimpleDateFormat char6DateFormat = DateHelper.get6charDateFormat();
+		SimpleDateFormat char8DateFormat = DateUtil.get8charDateFormat();
+		SimpleDateFormat char6DateFormat = DateUtil.get6charDateFormat();
 
 		if (dateString != null && dateString.length() == 8 && StringUtils.isNumeric(dateString)) {
 			ParsePosition pos = new ParsePosition(0);
@@ -492,6 +491,11 @@ public abstract class DateHelper {
 	 */
 	public static String getYYYMMDDHHMMSSDateFormat() {
 		return new SimpleDateFormat(YYYMMDDHHMMSSFORMAT).format(new Date());
+	}
+	
+	public static Date valueOfDate(String date, String pattern) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+		return sdf.parse(date);
 	}
 
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 @RequestMapping("/admin")
-public class AdminIndexAction extends AdminBaseAction {
+public class IndexController extends BaseController {
 
 	@RequestMapping(value = "/index.htm", method = RequestMethod.GET)
 	public String login(ModelMap modelMap){

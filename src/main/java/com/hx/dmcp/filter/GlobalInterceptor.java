@@ -25,7 +25,7 @@ public class GlobalInterceptor implements HandlerInterceptor {
 		if (null == modelAndView) {
 			return;
 		}
-		User user = (User) request.getSession().getAttribute(SystemConstant.SESSION_ADMIN);
+		User user = (User) request.getSession().getAttribute(SystemConstant.USER_SESSION);
 		if (user == null) {
 			modelAndView.addObject("isAdmin", false);
 		} else {
