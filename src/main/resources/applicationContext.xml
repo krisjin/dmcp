@@ -45,10 +45,6 @@
 		<property name="caches">
 			<set>
 				<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="default" />
-				<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="config" />
-				<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="folder" />
-				<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="article" />
-				<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="attachment" />
 			</set>
 		</property>
 	</bean>
