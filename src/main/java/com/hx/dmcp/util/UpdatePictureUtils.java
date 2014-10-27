@@ -1,8 +1,11 @@
 package com.hx.dmcp.util;
 
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
+import com.hx.dmcp.constant.SystemConstant;
+import org.imgscalr.Scalr;
+import org.springframework.stereotype.Service;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
@@ -10,14 +13,6 @@ import java.awt.image.ImageFilter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
-
-import org.imgscalr.Scalr;
-import org.springframework.stereotype.Service;
-
-import com.hx.dmcp.constant.SystemConstant;
 
 @Service
 public class UpdatePictureUtils {

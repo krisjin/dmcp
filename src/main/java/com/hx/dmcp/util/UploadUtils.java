@@ -1,11 +1,11 @@
 package com.hx.dmcp.util;
 
+import com.hx.dmcp.constant.SystemConstant;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
-import com.hx.dmcp.constant.SystemConstant;
 
 
 public class UploadUtils {

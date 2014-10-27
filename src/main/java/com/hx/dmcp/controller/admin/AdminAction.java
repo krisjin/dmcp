@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hx.dmcp.constant.AdminConstant;
-import com.hx.dmcp.entity.Admin;
+import com.hx.dmcp.entity.User;
 import com.hx.dmcp.entity.vo.JsonVo;
 
 /**
@@ -25,14 +25,14 @@ public class AdminAction extends AdminBaseAction {
 	public String oneAdmin(
 			@RequestParam(value = "adminId", defaultValue = "0") long adminId,
 			ModelMap modelMap, HttpServletRequest request) {
-			Admin admin = new Admin();
+			User user = new User();
 			if (adminId == 0) {
-				admin = this.getAdmin(request);
-				admin = adminService.getAdminById(admin.getAdminId());
+				user = this.getAdmin(request);
+				user = userService.getUserById(user.getAdminId());
 			} else {
-				admin = adminService.getAdminById(adminId);
+				user = userService.getUserById(adminId);
 			}
-			modelMap.put("admin", admin);
+			modelMap.put("admin", user);
 			return "page/userModify";
 	}
 	
@@ -46,7 +46,7 @@ public class AdminAction extends AdminBaseAction {
 			@RequestParam(value = "status") AdminConstant.Status status) {
 
 		JsonVo<String> json = new JsonVo<String>();
-		Admin admin = adminService.getAdminByEmail(email);
+		User user = userService.getUserByEmail(email);
 		try {
 			
 			if (adminName.equals("")) 
@@ -59,7 +59,7 @@ public class AdminAction extends AdminBaseAction {
 				json.getErrors().put("email", "电子邮箱不能为空");
 				
 			validate(json);
-			admin=adminService.updateAdmin(adminId, adminName, password, status,email);
+			user = userService.updateUser(adminId, adminName, password, status, email);
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);

@@ -1,11 +1,9 @@
 package com.hx.dmcp.util;
 
-import javax.servlet.http.HttpServletRequest;
-
-
+import com.hx.dmcp.constant.SystemConstant;
 import org.apache.commons.lang3.StringUtils;
 
-import com.hx.dmcp.constant.SystemConstant;
+import javax.servlet.http.HttpServletRequest;
 
 public class HttpUtils {
 

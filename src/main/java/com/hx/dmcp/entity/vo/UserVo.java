@@ -1,6 +1,6 @@
 package com.hx.dmcp.entity.vo;
 
-import com.hx.dmcp.entity.Admin;
+import com.hx.dmcp.entity.User;
 
 
 /**
@@ -8,7 +8,7 @@ import com.hx.dmcp.entity.Admin;
  * 
  * @author krisjin
  */
-public class AdminVo extends Admin {
+public class UserVo extends User {
 	private String faceUrl;
 
 	public String getFaceUrl() {

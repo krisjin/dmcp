@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.hx.dmcp.constant.SystemConstant;
-import com.hx.dmcp.entity.Admin;
+import com.hx.dmcp.entity.User;
 import com.hx.dmcp.entity.vo.JsonVo;
 import com.hx.dmcp.exception.ControllerValidateException;
-import com.hx.dmcp.service.AdminService;
+import com.hx.dmcp.service.UserService;
 import com.hx.dmcp.util.UpdatePictureUtils;
 
 /**
@@ -24,7 +24,7 @@ public class AdminBaseAction {
 
 
 	@Autowired
-	protected AdminService adminService;
+	protected UserService userService;
 
 	@Autowired
 	protected UpdatePictureUtils updatePictureConsTant;
@@ -38,8 +38,8 @@ public class AdminBaseAction {
 		}
 	}
 
-	protected Admin getAdmin(HttpServletRequest request) {
-		Admin admin = (Admin) request.getSession().getAttribute(SystemConstant.SESSION_ADMIN);
-		return admin;
+	protected User getAdmin(HttpServletRequest request) {
+		User user = (User) request.getSession().getAttribute(SystemConstant.SESSION_ADMIN);
+		return user;
 	}
 }

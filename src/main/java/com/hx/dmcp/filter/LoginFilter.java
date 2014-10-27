@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.hx.dmcp.constant.SystemConstant;
-import com.hx.dmcp.entity.Admin;
+import com.hx.dmcp.entity.User;
 
 /**
  * TODO 后台登陆拦截
@@ -34,9 +34,9 @@ public class LoginFilter implements Filter {
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-		Admin admin = (Admin) request.getSession().getAttribute(SystemConstant.SESSION_ADMIN);
+		User user = (User) request.getSession().getAttribute(SystemConstant.SESSION_ADMIN);
 
-		if (admin == null) {
+		if (user == null) {
 			String path = request.getContextPath();
 			String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
 			response.sendRedirect(basePath + "/auth/admin/login.htm");

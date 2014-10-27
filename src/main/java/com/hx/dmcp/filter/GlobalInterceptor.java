@@ -8,7 +8,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hx.dmcp.constant.SystemConstant;
-import com.hx.dmcp.entity.Admin;
+import com.hx.dmcp.entity.User;
 import com.hx.dmcp.util.HttpUtils;
 
 @Component
@@ -25,8 +25,8 @@ public class GlobalInterceptor implements HandlerInterceptor {
 		if (null == modelAndView) {
 			return;
 		}
-		Admin admin = (Admin) request.getSession().getAttribute(SystemConstant.SESSION_ADMIN);
-		if (admin == null) {
+		User user = (User) request.getSession().getAttribute(SystemConstant.SESSION_ADMIN);
+		if (user == null) {
 			modelAndView.addObject("isAdmin", false);
 		} else {
 			modelAndView.addObject("isAdmin", true);

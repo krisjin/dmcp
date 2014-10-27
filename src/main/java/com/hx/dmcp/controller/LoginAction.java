@@ -1,11 +1,12 @@
 package com.hx.dmcp.controller;
 
-import java.io.File;
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.hx.dmcp.constant.SystemConstant;
+import com.hx.dmcp.constant.ValidateInfoConstant;
+import com.hx.dmcp.entity.User;
+import com.hx.dmcp.entity.vo.JsonVo;
+import com.hx.dmcp.service.UserService;
+import com.hx.dmcp.util.HttpUtils;
+import com.hx.dmcp.util.MD5Util;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,65 +17,82 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hx.dmcp.constant.SystemConstant;
-import com.hx.dmcp.constant.ValidateInfoConstant;
-import com.hx.dmcp.entity.vo.JsonVo;
-import com.hx.dmcp.service.AdminService;
-import com.hx.dmcp.util.HttpUtils;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/auth/admin")
 public class LoginAction extends BaseAction {
 
+    @Autowired
+    private UserService userService;
 
-	@Autowired
-	private AdminService adminService;
+    @RequestMapping(value = "/login.htm", method = RequestMethod.GET)
+    public String adminLogin(HttpServletRequest request, ModelMap modelMap) {
+        return "page/login";
+    }
 
-	@RequestMapping(value = "/login.htm", method = RequestMethod.GET)
-	public String adminLogin(HttpServletRequest request, ModelMap modelMap) {
-		return "page/login";
-	}
+    @RequestMapping(value = "/logout.htm", method = RequestMethod.GET)
+    public String adminLogout(HttpServletRequest request, ModelMap modelMap, HttpServletResponse response) {
+        request.getSession().removeAttribute(SystemConstant.SESSION_ADMIN);
+        String path = HttpUtils.getBasePath(request) + File.separator + "auth/admin/login.htm";
 
-	@RequestMapping(value = "/logout.htm", method = RequestMethod.GET)
-	public String adminLogout(HttpServletRequest request, ModelMap modelMap, HttpServletResponse response) {
-		request.getSession().removeAttribute(SystemConstant.SESSION_ADMIN);
-		String path = HttpUtils.getBasePath(request) + File.separator + "auth/admin/login.htm";
+        try {
+            response.sendRedirect(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-		try {
-			response.sendRedirect(path);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+        return null;
+    }
 
-		return null;
-	}
+    @ResponseBody
+    @RequestMapping(value = "/login.json", method = RequestMethod.POST)
+    public JsonVo<String> userLogin(@RequestParam(value = "email") String email,
+                                    @RequestParam(value = "password") String password,
+                                    HttpServletRequest request, ModelMap modelMap) {
+        HttpSession session = request.getSession();
+        JsonVo<String> json = new JsonVo<String>();
+        try {
+            if (EmailValidator.getInstance().isValid(email)) {
+                User u = userService.getUserByEmail(email);
+                if (null == u) {
+                    json.getErrors().put("email", ValidateInfoConstant.USER_EMAIL);
+                }
+            } else {
+                if (email == null || email.equals("")) {
+                    json.getErrors().put("email", ValidateInfoConstant.USER_EMAIL);
+                } else {
+                    User u = userService.getUserByName(email);
+                    if (u == null) {
+                        json.getErrors().put("email", ValidateInfoConstant.USER_EMAIL);
+                    }
+                }
+            }
 
-	@ResponseBody
-	@RequestMapping(value = "/login.json", method = RequestMethod.POST)
-	public JsonVo<String> adminLogin(@RequestParam(value = "email") String email, 
-									 @RequestParam(value = "password") String password,
-									 HttpServletRequest request, ModelMap modelMap) {
-		
-		JsonVo<String> json = new JsonVo<String>();
+            if (StringUtils.isBlank(password)) {
+                json.getErrors().put("password", ValidateInfoConstant.PASSWORD);
+            }
 
-		try {
-			if (!EmailValidator.getInstance().isValid(email)) {
-				json.getErrors().put("email", ValidateInfoConstant.USER_EMAIL);
-			}
-			if (StringUtils.isBlank(password)) {
-				json.getErrors().put("password", "密码不能为空");
-			} else if (password.length() < 6 && password.length() > 30) {
-				json.getErrors().put("password", "密码最少6个字符，最多30个字符");
-			}
-			this.validate(json);
+            User u = userService.getUserByPassword(password);
+            if (null == u) {
+                json.getErrors().put("password", ValidateInfoConstant.PASSWORD);
+            }
 
-			adminService.adminLogin(email, password, request);
+            this.validate(json);
 
-		} catch (Exception e) {
-			json.setResult(false);
-			json.getErrors().put("password", ValidateInfoConstant.PASSWORD);
-		}
-		return json;
-	}
+            if (!u.getPassword().equals(MD5Util.encrypt(password))) {
+                json.getErrors().put("password", ValidateInfoConstant.PASSWORD);
+            }
 
+            session.setAttribute(SystemConstant.SESSION_ADMIN, u);
+        } catch (Exception e) {
+            json.setResult(false);
+            json.getErrors().put("password", "登录错误!");
+        }
+        return json;
+    }
 }
