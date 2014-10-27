@@ -12,22 +12,17 @@ import com.hx.dmcp.entity.User;
 import com.hx.dmcp.entity.vo.JsonVo;
 import com.hx.dmcp.exception.ControllerValidateException;
 import com.hx.dmcp.service.UserService;
-import com.hx.dmcp.util.UpdatePictureUtils;
 
 /**
  * @author krisjin
  */
 @Controller
-public class AdminBaseAction {
+public class BaseController {
 
 	public final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-
 	@Autowired
 	protected UserService userService;
-
-	@Autowired
-	protected UpdatePictureUtils updatePictureConsTant;
 
 	protected <T> void validate(JsonVo<T> json) throws ControllerValidateException {
 		if (json.getErrors().size() > 0) {
@@ -38,8 +33,8 @@ public class AdminBaseAction {
 		}
 	}
 
-	protected User getAdmin(HttpServletRequest request) {
-		User user = (User) request.getSession().getAttribute(SystemConstant.SESSION_ADMIN);
+	protected User getUser(HttpServletRequest request) {
+		User user = (User) request.getSession().getAttribute(SystemConstant.USER_SESSION);
 		return user;
 	}
 }

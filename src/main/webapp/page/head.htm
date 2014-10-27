@@ -8,6 +8,7 @@
 <title>数据挖掘计算平台</title>
 
 <link href="${basePath}/page/css/bootstrap.min.css" rel="stylesheet">
+<link href="${basePath}/page/css/bootstrap-theme.min.css" rel="stylesheet">
 <link href="${basePath}/page/css/layout.css" rel="stylesheet" />
 
 
@@ -26,6 +27,17 @@
   <div id="header">
   	
   	<img src="${basePath}/page/img/dmcplogo.png" style="margin-top: 14px;margin-left: 8px;">
+  	
+  	
+  <div style="float: right; margin-right: 80px;margin-top: 10px;">
+	<div class="dropdown">
+	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+	    <span class="glyphicon glyphicon-user"></span>${USER_SESSION.name}
+	    <span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+	    <li role="presentation"><a role="menuitem" tabindex="-1" href="${basePath}/auth/admin/logout.htm"><span class="glyphicon glyphicon-log-out"></span>注销</a></li>
+	  </ul>
+	</div>
+</div>
   </div>
-
-

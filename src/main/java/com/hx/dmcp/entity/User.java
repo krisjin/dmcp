@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class User {
 
-    private long adminId;
+    private long userId;
 
     private String email;
 
@@ -21,15 +21,17 @@ public class User {
 
     private Date createTime;
 
-    public long getAdminId() {
-        return adminId;
-    }
 
-    public void setAdminId(long adminId) {
-        this.adminId = adminId;
-    }
 
-    public String getName() {
+    public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+
+	public String getName() {
         return name;
     }
 
