@@ -7,9 +7,10 @@ DMCP数据挖掘计算平台
 
 ## 标签
 
-* SpringMVC3.2
-* Mybatis
-* Druid
-* Bootstrap3.0.2
+* spring mvc3.2.4
+* mybatis3.2.3
+* druid1.0.9
+* bootstrap3.0.2
+* freemarker
 
 
