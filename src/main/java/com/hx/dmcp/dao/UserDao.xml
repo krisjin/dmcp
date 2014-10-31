@@ -12,6 +12,10 @@
 		delete from user where userId=#{userId}
 	</delete>
 	
+	<delete id="deleteUsers" parameterType="String">
+		delete from user where userId in (#{userId})
+	</delete>
+	
 	<update id="updateUser" parameterType="com.hx.dmcp.entity.User">
 		update user set email=#{email}, name=#{name},password=#{password},status=#{status},createTime=#{createTime} where userId=#{userId}
 	</update>

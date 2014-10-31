@@ -15,6 +15,7 @@
 		            <table class="table table-hover">
 				      <thead>
 				        <tr>
+				          <th>#</th>
 				          <th>用户名</th>
 				          <th>Email</th>
 				          <th>状态</th>
@@ -22,9 +23,10 @@
 				        </tr>
 				      </thead>
 				      <tbody>
-<#assign dataes=page.getData()>
-			<#list dataes as user>
+				<#assign dataes=page.getData()>
+				<#list dataes as user>
 				        <tr>
+				          <td><input type="checkbox" value="${user.userId}" name="userId"></td>
 				          <td>${user.name}</td>
 				          <td>${user.email}</td>
 				          <td>
@@ -36,7 +38,7 @@
 				          </td>
 				          <td>${user.createTime?string('yyyy-MM-dd HH:ss')}</td>
 				        </tr>
-			</#list>
+				</#list>
 				      </tbody>
 				    </table>
 		            </div>
@@ -46,8 +48,8 @@
 		             <div class="row show-grid" style="height: 70px;">
 					      <div class="col-xs-4" style="margin-top: 20px;">
 				             <span> <a class="btn btn-success" href="${basePath}/admin/user/addUser.htm" >新增用户</a></span>
-				             <span> <a class="btn btn-warning" href="#" >修改用户</a></span>
-				             <span> <a class="btn btn-danger" href="#" >删除用户</a></span>
+				             <span> <a class="btn btn-warning" href="#" onclick="updateUser();">修改用户</a></span>
+				             <span> <a class="btn btn-danger" href="#" onclick="deleteUser();" >删除用户</a></span>
 					      </div>
 					      <div class="col-xs-8" style="margin-top: 0px;">
 		             		${page.getPaginationStr()}
@@ -60,21 +62,46 @@
    </div>
 </div>
 <script type="text/javascript">
-	$(function() {
-		$("#update_userId").hide();
-		$('#updateUserForm').ajaxForm({
-			dataType : 'json',
-			success : function(data) {
-				if (data.result) {
-					bootbox.alert("保存成功，将刷新页面", function() {
-						window.location.reload();
-					});
-				} else {
-					showErrors($('#updateUserForm'), data.errors);
-				}
-			}
+	function deleteUser(){
+		var id_array=new Array();
+		$('input[name="userId"]:checked').each(function(){
+			id_array.push($(this).val());
 		});
-	});
+		var ids=id_array.join(',');
+		
+		if(ids.length==0){
+			alert("请选中一条记录!");
+			return false;
+		}
+		
+		$.ajax( {    
+		    url:'${basePath}/admin/user/deleteUser.htm',  
+		    data:{ userId : ids},    
+		    dataType:'json',    
+		    success : function(json) {
+				
+			}    
+		}); 
+		
+		window.location.reload();
+		
+	}
+	
+	
+	function updateUser(){
+		var ids=new Array();
+		$('input[name="userId"]:checked').each(function(){
+			ids.push($(this).val());
+		});
+
+		if( ids.length==0 || ids.length>1){
+			alert("请选中一条记录!");
+			return false;
+		}
+		
+		window.location.href="${basePath}/admin/user/updateUser.htm?userId="+ids[0];
+		
+	}
 </script>
 
 <#include "/page/foot.htm">

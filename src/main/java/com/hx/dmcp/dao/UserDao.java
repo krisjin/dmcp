@@ -15,6 +15,8 @@ public interface UserDao {
 
 	public int addUser(User user);
 
+	public void deleteUsers(@Param("userId") String userId);
+
 	public int deleteUser(@Param("userId") long userId);
 
 	public int updateUser(User user);

@@ -73,4 +73,10 @@ public class UserService {
     public User getUserByPassword(String password) {
         return userDao.getUserByPassword(password);
     }
+    
+    public void deleteUsers(String userId){
+    	 userDao.deleteUsers(userId);
+    }
+    
+    
 }

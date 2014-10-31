@@ -23,23 +23,21 @@ import com.hx.dmcp.util.Pagination;
  * @date 2014-10-24
  */
 @Controller
-@Scope("prototype") 
+@Scope("prototype")
 @RequestMapping("/admin/user")
 public class UserManageController extends BaseController {
 
 	@RequestMapping(value = "/listUser.htm", method = RequestMethod.GET)
-	public String listUser(@RequestParam(value="p",defaultValue="1") int p,ModelMap model) {
-		Pagination<User> page =userService.getUserWithPage(p, 15);
+	public String listUser(@RequestParam(value = "p", defaultValue = "1") int p, ModelMap model) {
+		Pagination<User> page = userService.getUserWithPage(p, 15);
 		model.put("page", page);
 		return "page/user/listUser";
 	}
 
-	@RequestMapping(value = "/update.htm", method = RequestMethod.GET)
+	@RequestMapping(value = "/updateUser.htm", method = RequestMethod.GET)
 	public String update(@RequestParam(value = "userId", defaultValue = "0") long userId, ModelMap modelMap, HttpServletRequest request) {
-		User user = new User();
-		if (userId == 0) {
-			user = this.getUser(request);
-		}
+		User user = userService.getUserById(userId);
+
 		modelMap.put("user", user);
 		return "page/user/userModify";
 	}
@@ -81,8 +79,7 @@ public class UserManageController extends BaseController {
 	@ResponseBody
 	@RequestMapping(value = "/saveUser.json", method = RequestMethod.POST)
 	public JsonUtil<String> saveUser(@RequestParam(value = "userName") String userName, @RequestParam(value = "email") String email,
-			@RequestParam(value = "password") String password, 
-			@RequestParam(value = "status") int status) {
+			@RequestParam(value = "password") String password, @RequestParam(value = "status") int status) {
 
 		JsonUtil<String> json = new JsonUtil<String>();
 		email = email.toLowerCase();
@@ -111,6 +108,14 @@ public class UserManageController extends BaseController {
 		}
 		return json;
 	}
+	@ResponseBody
+	@RequestMapping(value = "/deleteUser", method = RequestMethod.GET)
+	public JsonUtil<String> deleteUser(@RequestParam(value = "userId") String userId) {
+		JsonUtil json = new JsonUtil<String>();
+
+		userService.deleteUsers(userId);
+		json.setResult(true);
+		return json;
+	}
 
 }
-//
