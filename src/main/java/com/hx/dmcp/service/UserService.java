@@ -1,6 +1,5 @@
 package com.hx.dmcp.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.hx.dmcp.dao.UserDao;
 import com.hx.dmcp.entity.User;
 import com.hx.dmcp.util.MD5Util;
-import com.hx.dmcp.util.PaginationUtil;
+import com.hx.dmcp.util.Pagination;
 
 @Service
 public class UserService {
@@ -17,14 +16,7 @@ public class UserService {
     @Autowired
     private UserDao userDao;
 
-    public User addUser(String email, String name, String password, int status) {
-        email = email.toLowerCase();
-        User user = new User();
-        user.setName(name);
-        user.setEmail(email);
-        user.setStatus(status);
-        user.setCreateTime(new Date());
-        user.setPassword(MD5Util.encrypt(password));
+    public User addUser(User user) {
         userDao.addUser(user);
         return user;
     }
@@ -50,21 +42,24 @@ public class UserService {
         return userDao.getUserById(userId);
     }
 
-    public List<User> getAllList(long offset, long rows) {
-        return userDao.getAllList(offset, rows);
+
+    public List<User> getUserWithPage(Pagination<User> page){
+    	return userDao.getUserWithPage(page.getOffsetRecords(),page.getPerPageRecords());
+    }
+    
+    
+    public int getTotalUserCounts() {
+        return userDao.getTotalUserCounts();
     }
 
-    public int getAllListCount() {
-        return userDao.getAllListCount();
-    }
-
-    public PaginationUtil<User> getAllListPage(int pageNum) {
-        PaginationUtil<User> pageVo = new PaginationUtil<User>(pageNum);
-        pageVo.setRows(5);
-        List<User> list = this.getAllList(pageVo.getOffset(), pageVo.getRows());
-        pageVo.setList(list);
-        pageVo.setCount(this.getAllListCount());
-        return pageVo;
+    public Pagination<User> getUserWithPage(int pageNO,int perPageRecords) {
+        Pagination<User> page = new Pagination<User>();
+        page.setCurrentPageSize(pageNO);
+        page.setPerPageRecords(perPageRecords);
+        List<User> list = this.getUserWithPage(page);
+        page.setData(list);
+        page.setTotalRecords(this.getTotalUserCounts());
+        return page;
     }
 
     public User getUserByEmail(String email) {

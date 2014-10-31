@@ -16,11 +16,11 @@
 		update user set email=#{email}, name=#{name},password=#{password},status=#{status},createTime=#{createTime} where userId=#{userId}
 	</update>
 		
-	<select id="getAllList" resultType="com.hx.dmcp.entity.User">
+	<select id="getUserWithPage" resultType="com.hx.dmcp.entity.User">
 		select * from user limit #{offset},#{rows}
 	</select>
 	
-	<select id="getAllListCount" resultType="int">
+	<select id="getTotalUserCounts" resultType="int">
 		select count(*) from user
 	</select>
 	

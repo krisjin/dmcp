@@ -56,18 +56,19 @@ public class LoginController extends BaseController {
 			HttpServletRequest request, ModelMap modelMap) {
 		HttpSession session = request.getSession();
 		JsonUtil<String> json = new JsonUtil<String>();
+		User user =null;
 		try {
 			if (EmailValidator.getInstance().isValid(email)) {
-				User u = userService.getUserByEmail(email);
-				if (null == u) {
+				user = userService.getUserByEmail(email);
+				if (null == user) {
 					json.getErrors().put("email", ValidateInfoConstant.USER_EMAIL);
 				}
 			} else {
 				if (email == null || email.equals("")) {
 					json.getErrors().put("email", ValidateInfoConstant.USER_EMAIL);
 				} else {
-					User u = userService.getUserByName(email);
-					if (u == null) {
+					user = userService.getUserByName(email);
+					if (user == null) {
 						json.getErrors().put("email", ValidateInfoConstant.USER_EMAIL);
 					}
 				}
@@ -77,16 +78,16 @@ public class LoginController extends BaseController {
 				json.getErrors().put("password", ValidateInfoConstant.PASSWORD);
 			}
 
-			User u = userService.getUserByPassword(MD5Util.encrypt(password));
-			if (null == u) {
+			
+			if (null == user) {
 				json.getErrors().put("password", ValidateInfoConstant.PASSWORD);
 			}
 
-			if (!u.getPassword().equals(MD5Util.encrypt(password))) {
+			if (!user.getPassword().equals(MD5Util.encrypt(password))) {
 				json.getErrors().put("password", ValidateInfoConstant.PASSWORD);
 			}
 
-			session.setAttribute(SystemConstant.USER_SESSION, u);
+			session.setAttribute(SystemConstant.USER_SESSION, user);
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);

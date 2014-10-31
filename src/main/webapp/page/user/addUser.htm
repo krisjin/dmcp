@@ -1,49 +1,41 @@
-<#include "head.htm">
+<#include "/page/head.htm">
 
 <div id="container-layout">
-
   <div id="mainContent">
-  
     <div id="sidebar">
-  	<#include "sidebar.htm">
-   		 
+  		<#include "/page/sidebar.htm">
     </div>
     
     <div id="content">
 		<div class="panel panel-primary">
 		            <div class="panel-heading">
-		              <h3 class="panel-title">个人信息设置</h3>
+		              <h3 class="panel-title">添加用户信息</h3>
 		            </div>
 		            <div class="panel-body">
 		            	<div style="width: 500px;margin-left: 20px;">
-			             <form role="form" id="updateUserForm" method="post" class="form-horizontal" autocomplete="off" action="${basePath}/admin/user/update.json">
+			             <form role="form" id="addUserForm" method="post" class="form-horizontal" autocomplete="off" action="${basePath}/admin/user/saveUser.json">
 						 
-						  <input type="hidden" class="form-control" name="userId" value="${user.userId}">
 						  <div class="form-group">
 						    <label for="exampleInputEmail1">用户名</label>
-						    <input type="text" class="form-control" name="userName" value="${user.name}"  id="userName" required>
+						    <input type="text" class="form-control" name="userName" id="userName" required>
 						  </div>
 						  
 						  <div class="form-group">
 						    <label for="exampleInputPassword1">Email</label>
-							<input type="text" class="form-control" name="email"	value="${user.email}"  id="email" required>
+							<input type="text" class="form-control" name="email" id="email" value="" required>
 						  </div>
 						  
 						  <div class="form-group">
 						    <label for="exampleInputPassword1">密   码</label>
-							<input type="password" class="form-control" name="password" value="" id="password" required>
+							<input type="password" class="form-control" name="password" id="password" value="" required>
 						  </div>
 						  
 						  <div class="form-group">
 						    <label for="exampleInputPassword1">状   态</label>
-							<input type="radio" name="status" value="normal"<#if user.status=="normal">checked="checked"</#if>/>正常 <input
-										type="radio" name="status" value="freeze"<#if
-									user.status=="freeze">checked="checked"</#if>/>冻结
+							<input type="radio" name="status" value="1" checked="checked" />正常 
+							<input type="radio" name="status" value="0"/>无效
 						  </div>
-						  
-						  
-						
-						  <button type="submit" class="btn btn-default">修改</button>
+						  <button type="submit" class="btn btn-default">保 存</button>
 						 </form>
 						 </div>
 		            </div>
@@ -54,7 +46,7 @@
 <script type="text/javascript">
 	$(function() {
 		$("#update_userId").hide();
-		$('#updateUserForm').ajaxForm({
+		$('#addUserForm').ajaxForm({
 			dataType : 'json',
 			success : function(data) {
 				if (data.result) {
@@ -62,11 +54,11 @@
 						window.location.reload();
 					});
 				} else {
-					showErrors($('#updateUserForm'), data.errors);
+					showErrors($('#addUserForm'), data.errors);
 				}
 			}
 		});
 	});
 </script>
 
-<#include "foot.htm">
+<#include "/page/foot.htm">

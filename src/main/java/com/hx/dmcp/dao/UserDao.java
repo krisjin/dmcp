@@ -19,9 +19,9 @@ public interface UserDao {
 
 	public int updateUser(User user);
 
-	public List<User> getAllList(@Param("offset") long offset, @Param("rows") long rows);
+	public List<User> getUserWithPage(@Param("offset") long offset, @Param("rows") long rows);
 
-	public int getAllListCount();
+	public int getTotalUserCounts();
 
 	public User getUserById(@Param("userId") long userId);
 
