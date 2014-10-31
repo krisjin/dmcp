@@ -1,12 +1,9 @@
 <#include "head.htm">
 
 <div id="container-layout">
-
   <div id="mainContent">
-  
     <div id="sidebar">
-  	<#include "sidebar.htm">
-   		 
+  		<#include "sidebar.htm">
     </div>
     
     <div id="content">
@@ -36,13 +33,9 @@
 						  
 						  <div class="form-group">
 						    <label for="exampleInputPassword1">状   态</label>
-							<input type="radio" name="status" value="normal"<#if user.status=="normal">checked="checked"</#if>/>正常 <input
-										type="radio" name="status" value="freeze"<#if
-									user.status=="freeze">checked="checked"</#if>/>冻结
+							<input type="radio" name="status" value="1"<#if user.status==1>checked="checked"</#if>/>正常 
+							<input type="radio" name="status" value="0"<#if user.status==0>checked="checked"</#if>/>无效
 						  </div>
-						  
-						  
-						
 						  <button type="submit" class="btn btn-default">修改</button>
 						 </form>
 						 </div>

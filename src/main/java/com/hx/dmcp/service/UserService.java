@@ -6,11 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hx.dmcp.constant.AdminConstant;
 import com.hx.dmcp.dao.UserDao;
 import com.hx.dmcp.entity.User;
-import com.hx.dmcp.entity.vo.PageVo;
 import com.hx.dmcp.util.MD5Util;
+import com.hx.dmcp.util.PaginationUtil;
 
 @Service
 public class UserService {
@@ -18,7 +17,7 @@ public class UserService {
     @Autowired
     private UserDao userDao;
 
-    public User addUser(String email, String name, String password, AdminConstant.Status status) {
+    public User addUser(String email, String name, String password, int status) {
         email = email.toLowerCase();
         User user = new User();
         user.setName(name);
@@ -36,7 +35,7 @@ public class UserService {
     }
 
 
-    public User updateUser(long userId, String name, String password, AdminConstant.Status status, String email) {
+    public User updateUser(long userId, String name, String password, int status, String email) {
         User user = this.getUserById(userId);
         user.setName(name);
         user.setPassword(MD5Util.encrypt(password));
@@ -59,8 +58,8 @@ public class UserService {
         return userDao.getAllListCount();
     }
 
-    public PageVo<User> getAllListPage(int pageNum) {
-        PageVo<User> pageVo = new PageVo<User>(pageNum);
+    public PaginationUtil<User> getAllListPage(int pageNum) {
+        PaginationUtil<User> pageVo = new PaginationUtil<User>(pageNum);
         pageVo.setRows(5);
         List<User> list = this.getAllList(pageVo.getOffset(), pageVo.getRows());
         pageVo.setList(list);

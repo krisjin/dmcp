@@ -1,7 +1,5 @@
 package com.hx.dmcp.entity;
 
-import com.hx.dmcp.constant.AdminConstant;
-
 import java.util.Date;
 
 /**
@@ -9,21 +7,22 @@ import java.util.Date;
  */
 public class User {
 
-    private long userId;
+	private long userId;
 
-    private String email;
+	private String email;
 
-    private String name;
+	private String name;
 
-    private String password;
+	private String password;
 
-    private AdminConstant.Status status;
+	/**
+	 * 0:禁止状态; 1:正常使用
+	 */
+	private int status;
 
-    private Date createTime;
+	private Date createTime;
 
-
-
-    public long getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 
@@ -32,43 +31,43 @@ public class User {
 	}
 
 	public String getName() {
-        return name;
-    }
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public AdminConstant.Status getStatus() {
-        return status;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public void setStatus(AdminConstant.Status status) {
-        this.status = status;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public int getStatus() {
+		return status;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setStatus(int status) {
+		this.status = status;
+	}
 
 }

@@ -4,9 +4,9 @@ import com.hx.dmcp.constant.SystemConstant;
 import com.hx.dmcp.constant.ValidateInfoConstant;
 import com.hx.dmcp.controller.admin.BaseController;
 import com.hx.dmcp.entity.User;
-import com.hx.dmcp.entity.vo.JsonVo;
 import com.hx.dmcp.service.UserService;
 import com.hx.dmcp.util.HttpUtils;
+import com.hx.dmcp.util.JsonUtil;
 import com.hx.dmcp.util.MD5Util;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
@@ -52,10 +52,10 @@ public class LoginController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping(value = "/login.json", method = RequestMethod.POST)
-	public JsonVo<String> userLogin(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password,
+	public JsonUtil<String> userLogin(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password,
 			HttpServletRequest request, ModelMap modelMap) {
 		HttpSession session = request.getSession();
-		JsonVo<String> json = new JsonVo<String>();
+		JsonUtil<String> json = new JsonUtil<String>();
 		try {
 			if (EmailValidator.getInstance().isValid(email)) {
 				User u = userService.getUserByEmail(email);

@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hx.dmcp.constant.AdminConstant;
 import com.hx.dmcp.entity.User;
-import com.hx.dmcp.entity.vo.JsonVo;
+import com.hx.dmcp.util.JsonUtil;
 
 /**
  * @author krisjin
@@ -22,7 +21,7 @@ import com.hx.dmcp.entity.vo.JsonVo;
 public class UserManageController extends BaseController {
 
 	@RequestMapping(value = "/update.htm", method = RequestMethod.GET)
-	public String oneAdmin(
+	public String update(
 			@RequestParam(value = "userId", defaultValue = "0") long userId,
 			ModelMap modelMap, HttpServletRequest request) {
 			User user = new User();
@@ -35,14 +34,14 @@ public class UserManageController extends BaseController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/update.json", method = RequestMethod.POST)
-	public JsonVo<String> updateAdmin(
+	public JsonUtil<String> updateAdmin(
 			@RequestParam(value = "userName") String userName, 
 			@RequestParam(value = "email") String email,
 			@RequestParam(value = "password") String password, 
 			@RequestParam(value = "userId") long userId,
-			@RequestParam(value = "status") AdminConstant.Status status) {
+			@RequestParam(value = "status") int status) {
 
-		JsonVo<String> json = new JsonVo<String>();
+		JsonUtil<String> json = new JsonUtil<String>();
 		User user = userService.getUserById(userId);
 		try {
 			
@@ -64,5 +63,8 @@ public class UserManageController extends BaseController {
 		}
 		return json;
 	}
+	
+	
+	
 
 }

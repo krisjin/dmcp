@@ -9,9 +9,9 @@ import org.springframework.stereotype.Controller;
 
 import com.hx.dmcp.constant.SystemConstant;
 import com.hx.dmcp.entity.User;
-import com.hx.dmcp.entity.vo.JsonVo;
 import com.hx.dmcp.exception.ControllerValidateException;
 import com.hx.dmcp.service.UserService;
+import com.hx.dmcp.util.JsonUtil;
 
 /**
  * @author krisjin
@@ -24,7 +24,7 @@ public class BaseController {
 	@Autowired
 	protected UserService userService;
 
-	protected <T> void validate(JsonVo<T> json) throws ControllerValidateException {
+	protected <T> void validate(JsonUtil<T> json) throws ControllerValidateException {
 		if (json.getErrors().size() > 0) {
 			json.setResult(false);
 			throw new ControllerValidateException("有错误发生");

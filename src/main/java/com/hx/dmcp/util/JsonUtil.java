@@ -1,4 +1,4 @@
-package com.hx.dmcp.entity.vo;
+package com.hx.dmcp.util;
 
 import java.util.HashMap;
 
@@ -8,7 +8,8 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import com.hx.dmcp.exception.ControllerValidateException;
 
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-public class JsonVo<T> {
+public class JsonUtil<T> {
+	
 	private boolean result;
 
 	private String msg;

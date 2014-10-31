@@ -1,4 +1,4 @@
-package com.hx.dmcp.entity.vo;
+package com.hx.dmcp.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class PageVo<T> {
+public class PaginationUtil<T> {
 	/**
 	 * 页码
 	 */
@@ -43,7 +43,7 @@ public class PageVo<T> {
 	 */
 	private Map<String, String> args = new HashMap<String, String>();
 
-	public PageVo(int pageNum) {
+	public PaginationUtil(int pageNum) {
 		this.pageNum = pageNum;
 	}
 
