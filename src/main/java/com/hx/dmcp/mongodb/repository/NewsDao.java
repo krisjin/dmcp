@@ -1,4 +1,4 @@
-package com.hx.dmcp.mongodb.dao;
+package com.hx.dmcp.mongodb.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
