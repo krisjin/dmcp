@@ -1,4 +1,87 @@
 package com.hx.dmcp.mongodb.entity;
 
+import java.util.Date;
+
+import org.springframework.data.annotation.Id;
+
 public class News {
+
+	@Id
+	private String _id;
+
+	private int id;
+
+	private String newsTitle;
+
+	private String newsAuthor;
+
+	private String newsMedia;
+
+	private String newsUrl;
+
+	private int newsType;
+
+	private Date newsPosttime;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getNewsTitle() {
+		return newsTitle;
+	}
+
+	public void setNewsTitle(String newsTitle) {
+		this.newsTitle = newsTitle;
+	}
+
+	public String getNewsAuthor() {
+		return newsAuthor;
+	}
+
+	public void setNewsAuthor(String newsAuthor) {
+		this.newsAuthor = newsAuthor;
+	}
+
+	public String getNewsMedia() {
+		return newsMedia;
+	}
+
+	public void setNewsMedia(String newsMedia) {
+		this.newsMedia = newsMedia;
+	}
+
+	public String getNewsUrl() {
+		return newsUrl;
+	}
+
+	public void setNewsUrl(String newsUrl) {
+		this.newsUrl = newsUrl;
+	}
+
+	public int getNewsType() {
+		return newsType;
+	}
+
+	public void setNewsType(int newsType) {
+		this.newsType = newsType;
+	}
+
+	public Date getNewsPosttime() {
+		return newsPosttime;
+	}
+
+	public void setNewsPosttime(Date newsPosttime) {
+		this.newsPosttime = newsPosttime;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb =new StringBuilder();
+		return sb.append("News:").append("{id:").append(this.id).append(",newsTitle:").append(this.newsTitle).append("}").toString();
+	}
 }

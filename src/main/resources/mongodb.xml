@@ -15,7 +15,7 @@
 	<!-- <mongo:options /> -->
 	</mongo:mongo>
 
-	<mongo:db-factory dbname="test" mongo-ref="mongo" />
+	<mongo:db-factory dbname="dmcp" mongo-ref="mongo" />
 
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
