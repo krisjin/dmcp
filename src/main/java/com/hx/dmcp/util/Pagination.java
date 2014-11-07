@@ -24,7 +24,7 @@ public class Pagination<T> {
 	/**
 	 * 总记录数
 	 */
-	private int totalRecords;
+	private long totalRecords;
 
 	/**
 	 * 偏移记录数
@@ -134,11 +134,11 @@ public class Pagination<T> {
 		return sb.toString();
 	}
 
-	public int getTotalRecords() {
+	public long getTotalRecords() {
 		return totalRecords;
 	}
 
-	public void setTotalRecords(int totalRecords) {
+	public void setTotalRecords(long totalRecords) {
 		this.totalRecords = totalRecords;
 	}
 

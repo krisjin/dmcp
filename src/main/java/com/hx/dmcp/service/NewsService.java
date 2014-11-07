@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.hx.dmcp.mongodb.dao.NewsDao;
 import com.hx.dmcp.mongodb.entity.News;
+import com.hx.dmcp.util.Pagination;
 
 /**
  * @author krisjin
@@ -39,8 +40,14 @@ public class NewsService {
 	}
 	
 	
-	public List<News> findNewsWithPage(){
-		return newsDao.getAll();
-		
+	public List<News> findNewsWithPage(Pagination<News> page ,String newsPosttime){
+		return newsDao.getNewsWithPage(page);
+		//return newsDao.getNewsWithPageByPosttime(page, newsPosttime);
 	}
+	
+	public long getCountsNews(){
+		
+		return newsDao.count();
+	}
+	
 }
