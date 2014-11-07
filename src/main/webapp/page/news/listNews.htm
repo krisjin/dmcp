@@ -26,7 +26,13 @@
 				<#list newsList as news>
 				        <tr>
 				          <td><input type="checkbox" value="" name="userId"></td>
-				          <td>${news.newsTitle}</td>
+				          <td>
+				          <#if news.newsTitle?length gt 40>
+								${news.newsTitle[0..40]}
+								<#else>
+								${news.newsTitle}
+								</#if>
+				          </td>
 				          <td>${news.newsAuthor}</td>
 				          <td>${news.newsPosttime?string('yyyy-MM-dd HH:ss')}</td>
 				        </tr>

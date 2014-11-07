@@ -53,8 +53,6 @@ public class NewsDao extends BaseDao<News> {
 		query.skip(page.getOffsetRecords());
 		query.limit(page.getPerPageRecords());
 	
-		
-		
 		return this.getMongoTemplate().find(query, News.class);
 	}
 

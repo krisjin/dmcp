@@ -5,11 +5,14 @@ package com.hx.dmcp.entity;
  * @date 2014-10-31
  */
 public class Function {
+	
 	private int id;
 	private String funcName;
 	private String funcDesc;
 	private String actionUrl;
 	private String param;
+	
+	
 
 	public int getId() {
 		return id;
