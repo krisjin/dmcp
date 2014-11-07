@@ -13,5 +13,6 @@ DMCP数据挖掘计算平台
 * druid1.0.9
 * bootstrap3.0.2
 * freemarker
+* guava1.8
 
 
