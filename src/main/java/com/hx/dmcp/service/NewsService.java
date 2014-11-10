@@ -50,4 +50,7 @@ public class NewsService {
 		return newsDao.count();
 	}
 	
+	public List<News> findInflationNewsData(String startDate,String endDate){
+		return newsDao.getInflationNewsData(startDate, endDate);
+	} 
 }

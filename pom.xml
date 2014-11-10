@@ -213,7 +213,7 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-mongodb</artifactId>
-			<version>1.6.0.RELEASE</version>
+			<version>1.5.4.RELEASE</version>
 		</dependency>
 
 	</dependencies>

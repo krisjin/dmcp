@@ -1,6 +1,7 @@
 package com.hx.dmcp.controller.admin;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -46,13 +47,13 @@ public class NewsController {
 		Pagination<News> page = new Pagination<News>();
 		page.setCurrentPageSize(p);
 		page.setPerPageRecords(15);
-		List<News> news =null;
+		List<News> news = null;
 		page.setTotalRecords(newsSerivce.getCountsNews());
 
 		if (Strings.isNullOrEmpty(newsPosttime)) {
 			news = newsSerivce.findNewsWithPage(page, null);
 		} else {
-				news = newsSerivce.findNewsWithPage(page, newsPosttime);
+			news = newsSerivce.findNewsWithPage(page, newsPosttime);
 		}
 
 		page.setData(news);
@@ -66,6 +67,21 @@ public class NewsController {
 		page.setArgs(args);
 		model.put("page", page);
 		return "page/news/listNews";
+	}
+
+	@RequestMapping(value = "/inflation.htm", method = RequestMethod.POST)
+	public String getInflationNewsData(@RequestParam(value = "startDate", defaultValue ="") String startDate,
+			@RequestParam(value = "endDate", defaultValue = "") String endDate,ModelMap model) {
+		
+		List<News> newsList = newsSerivce.findInflationNewsData(startDate, endDate);
+		model.put("newsList", newsList);
+		return "page/inflation/inflation";
+	}
+	@RequestMapping(value = "/queryInflation.htm", method = RequestMethod.GET)
+	public String queryInflationNewsData(ModelMap model) {
+		List<News> newsList =new ArrayList<News>();
+		model.put("newsList", newsList);
+		return "page/inflation/inflation";
 	}
 
 	public NewsService getNewsSerivce() {

@@ -52,8 +52,31 @@ public class NewsDao extends BaseDao<News> {
 		query.with(new Sort(direction, "newsPosttime"));
 		query.skip(page.getOffsetRecords());
 		query.limit(page.getPerPageRecords());
-	
+
 		return this.getMongoTemplate().find(query, News.class);
+	}
+
+	public List<News> getInflationNewsData(String startDate, String endDate) {
+		Direction direction = Direction.ASC;
+		Query query = new Query();
+		query.with(new Sort(direction, "newsPosttime"));
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+
+		Date startDate1 = null;
+		Date endDate1 = null;
+		try {
+			startDate1 = sdf.parse(startDate.replaceAll("-", "/"));
+			endDate1 = sdf.parse(endDate.replaceAll("-", "/"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		query.addCriteria(Criteria.where("newsPosttime").gte(startDate1).lte(endDate1));
+		query.fields().include("newsTitle");
+		query.fields().include("newsPosttime");
+		
+		return this.getMongoTemplate().find(query, News.class);
+
 	}
 
 }
