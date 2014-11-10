@@ -10,77 +10,205 @@ Target Server Type    : MYSQL
 Target Server Version : 50535
 File Encoding         : 65001
 
-Date: 2014-10-27 18:43:38
+Date: 2014-11-10 17:07:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `funcgroup_func`
+-- ----------------------------
+DROP TABLE IF EXISTS `funcgroup_func`;
+CREATE TABLE `funcgroup_func` (
+`id`  int(11) NOT NULL AUTO_INCREMENT ,
+`functionId`  int(11) NOT NULL ,
+`functionGroupId`  int(11) NOT NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+AUTO_INCREMENT=1
+
+;
+
+-- ----------------------------
+-- Table structure for `function`
+-- ----------------------------
+DROP TABLE IF EXISTS `function`;
+CREATE TABLE `function` (
+`id`  int(11) NOT NULL AUTO_INCREMENT ,
+`funcName`  varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`funcDesc`  varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+`actionUrl`  varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`param`  varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+AUTO_INCREMENT=1
+
+;
+
+-- ----------------------------
+-- Table structure for `functiongroup`
+-- ----------------------------
+DROP TABLE IF EXISTS `functiongroup`;
+CREATE TABLE `functiongroup` (
+`id`  int(11) NOT NULL DEFAULT 0 ,
+`name`  varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+`actionUrl`  varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+`functions`  varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+
+;
 
 -- ----------------------------
 -- Table structure for `news`
 -- ----------------------------
 DROP TABLE IF EXISTS `news`;
 CREATE TABLE `news` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '新闻ID',
-  `newsTitle` varchar(512) DEFAULT NULL COMMENT '新闻标题',
-  `newsUrl` varchar(512) DEFAULT NULL,
-  `newsMedia` varchar(512) DEFAULT NULL COMMENT '新闻媒体',
-  `newsAuthor` varchar(125) DEFAULT NULL COMMENT '新闻作者',
-  `newsType` varchar(125) DEFAULT NULL COMMENT '新闻类型',
-  `newsStatus` varchar(20) DEFAULT NULL COMMENT '新闻状态:0(无效)，1(正常)',
-  `newsPosttime` datetime DEFAULT NULL COMMENT '发布时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+`id`  bigint(11) NOT NULL AUTO_INCREMENT ,
+`newsTitle`  varchar(500) CHARACTER SET gbk COLLATE gbk_chinese_ci NULL DEFAULT '0' ,
+`newsUrl`  varchar(500) CHARACTER SET gbk COLLATE gbk_chinese_ci NULL DEFAULT NULL ,
+`newsMedia`  varchar(200) CHARACTER SET gbk COLLATE gbk_chinese_ci NULL DEFAULT NULL ,
+`newsAuthor`  varchar(300) CHARACTER SET gbk COLLATE gbk_chinese_ci NULL DEFAULT NULL ,
+`newsType`  int(10) NOT NULL DEFAULT 0 ,
+`newsStatus`  int(1) NOT NULL ,
+`newsPosttime`  datetime NOT NULL ,
+PRIMARY KEY (`id`),
+INDEX `news_id` (`id`) USING BTREE ,
+INDEX `news_title` (`newsTitle`) USING BTREE 
+)
+ENGINE=MyISAM
+DEFAULT CHARACTER SET=gbk COLLATE=gbk_chinese_ci
+AUTO_INCREMENT=6609957
 
--- ----------------------------
--- Records of news
--- ----------------------------
+;
 
 -- ----------------------------
 -- Table structure for `news_content`
 -- ----------------------------
 DROP TABLE IF EXISTS `news_content`;
 CREATE TABLE `news_content` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `content` longtext COMMENT '正文',
-  `newsId` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+`id`  bigint(11) NOT NULL AUTO_INCREMENT ,
+`newsId`  bigint(11) NOT NULL ,
+`content`  mediumtext CHARACTER SET gbk COLLATE gbk_chinese_ci NULL ,
+PRIMARY KEY (`id`),
+INDEX `newsId_content` (`newsId`) USING BTREE 
+)
+ENGINE=MyISAM
+DEFAULT CHARACTER SET=gbk COLLATE=gbk_chinese_ci
+AUTO_INCREMENT=4309936
 
--- ----------------------------
--- Records of news_content
--- ----------------------------
+;
 
 -- ----------------------------
 -- Table structure for `role`
 -- ----------------------------
 DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '角色ID',
-  `roleName` varchar(255) DEFAULT NULL COMMENT '角色名称',
-  `roleDesc` varchar(512) DEFAULT NULL COMMENT '角色描述',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+`id`  int(20) NOT NULL AUTO_INCREMENT COMMENT '角色ID' ,
+`roleName`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '角色名称' ,
+`roleDesc`  varchar(512) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '角色描述' ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+AUTO_INCREMENT=1
+
+;
 
 -- ----------------------------
--- Records of role
+-- Table structure for `role_func`
 -- ----------------------------
+DROP TABLE IF EXISTS `role_func`;
+CREATE TABLE `role_func` (
+`id`  int(11) NOT NULL AUTO_INCREMENT ,
+`roleId`  int(11) NULL DEFAULT NULL ,
+`funcId`  int(11) NULL DEFAULT NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+AUTO_INCREMENT=1
+
+;
 
 -- ----------------------------
 -- Table structure for `user`
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `userId` bigint(10) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
-  `email` varchar(45) DEFAULT '' COMMENT '邮件地址',
-  `name` varchar(50) DEFAULT '' COMMENT '用户名称',
-  `password` varchar(32) DEFAULT '' COMMENT '用户密码',
-  `status` varchar(20) DEFAULT '' COMMENT '状态：0 隐藏 1 显示',
-  `createTime` datetime DEFAULT NULL COMMENT '创建时间',
-  PRIMARY KEY (`userId`),
-  UNIQUE KEY `idx_email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+`userId`  bigint(10) NOT NULL AUTO_INCREMENT COMMENT '用户ID' ,
+`email`  varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '邮件地址' ,
+`name`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '用户名称' ,
+`password`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '用户密码' ,
+`status`  int(2) NULL DEFAULT NULL COMMENT '状态：0 隐藏 1 显示' ,
+`createTime`  datetime NULL DEFAULT NULL COMMENT '创建时间' ,
+PRIMARY KEY (`userId`),
+UNIQUE INDEX `idx_email` (`email`) USING BTREE 
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+AUTO_INCREMENT=40
+
+;
 
 -- ----------------------------
--- Records of user
+-- Table structure for `user_role`
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'dmcp@163.com', 'dmcp', 'b106a48c84b6cd332e61c36285966321', 'normal', '2014-02-17 10:59:07');
+DROP TABLE IF EXISTS `user_role`;
+CREATE TABLE `user_role` (
+`id`  int(11) NOT NULL AUTO_INCREMENT ,
+`useId`  int(11) NOT NULL ,
+`roleId`  int(11) NOT NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+AUTO_INCREMENT=1
+
+;
+
+-- ----------------------------
+-- Auto increment value for `funcgroup_func`
+-- ----------------------------
+ALTER TABLE `funcgroup_func` AUTO_INCREMENT=1;
+
+-- ----------------------------
+-- Auto increment value for `function`
+-- ----------------------------
+ALTER TABLE `function` AUTO_INCREMENT=1;
+
+-- ----------------------------
+-- Auto increment value for `news`
+-- ----------------------------
+ALTER TABLE `news` AUTO_INCREMENT=6609957;
+
+-- ----------------------------
+-- Auto increment value for `news_content`
+-- ----------------------------
+ALTER TABLE `news_content` AUTO_INCREMENT=4309936;
+
+-- ----------------------------
+-- Auto increment value for `role`
+-- ----------------------------
+ALTER TABLE `role` AUTO_INCREMENT=1;
+
+-- ----------------------------
+-- Auto increment value for `role_func`
+-- ----------------------------
+ALTER TABLE `role_func` AUTO_INCREMENT=1;
+
+-- ----------------------------
+-- Auto increment value for `user`
+-- ----------------------------
+ALTER TABLE `user` AUTO_INCREMENT=40;
+
+-- ----------------------------
+-- Auto increment value for `user_role`
+-- ----------------------------
+ALTER TABLE `user_role` AUTO_INCREMENT=1;
