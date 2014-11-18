@@ -1,4 +1,4 @@
-package com.hx.dmcp.service;
+package com.hx.dmcp.mongodb.service;
 
 import java.util.List;
 
@@ -13,44 +13,44 @@ import com.hx.dmcp.util.Pagination;
  * @author krisjin
  * @date 2014-11-5
  */
-@Service
+@Service("newsServiceMongoDB")
 public class NewsService {
 
 	@Autowired
-	private NewsDao newsDao;
+	private NewsDao newsDaoMongoDB;
 
 	public void addNews(News entity) {
-		newsDao.save(entity);
+		newsDaoMongoDB.save(entity);
 	}
 
 	public void updateNews(News news) {
-		newsDao.update(news);
+		newsDaoMongoDB.update(news);
 	}
 
 	public News getNewsById(String id) {
-		return newsDao.getNewsById(id);
+		return newsDaoMongoDB.getNewsById(id);
 	}
 
 	public void deleteNews(News news) {
-		newsDao.delete(news);
+		newsDaoMongoDB.delete(news);
 	}
 
 	public void deleteNewsById(String id) {
-		newsDao.deleteById(id);
+		newsDaoMongoDB.deleteById(id);
 	}
 	
 	
 	public List<News> findNewsWithPage(Pagination<News> page ,String newsPosttime){
-		return newsDao.getNewsWithPage(page);
+		return newsDaoMongoDB.getNewsWithPage(page);
 		//return newsDao.getNewsWithPageByPosttime(page, newsPosttime);
 	}
 	
 	public long getCountsNews(){
 		
-		return newsDao.count();
+		return newsDaoMongoDB.count();
 	}
 	
 	public List<News> findInflationNewsData(String startDate,String endDate){
-		return newsDao.getInflationNewsData(startDate, endDate);
+		return newsDaoMongoDB.getInflationNewsData(startDate, endDate);
 	} 
 }

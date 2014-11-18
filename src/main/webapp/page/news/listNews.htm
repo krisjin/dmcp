@@ -17,7 +17,7 @@
 				        <tr>
 				          <th>#</th>
 				          <th>新闻标题</th>
-				          <!--<th>新闻作者</th>-->
+				          <th>媒体</th>
 				          <th>发布日期</th>
 				        </tr>
 				      </thead>
@@ -27,13 +27,15 @@
 				        <tr>
 				          <td><input type="checkbox" value="" name="userId"></td>
 				          <td>
+				          <a href="${basePath}/admin/ms/news/${news.id}.htm">
 				          <#if news.newsTitle?length gt 40>
 								${news.newsTitle[0..40]}
 								<#else>
 								${news.newsTitle}
 								</#if>
+						 </a>
 				          </td>
-				          <!-- <td></td> -->
+				          <td>${news.newsMedia}</td>
 				          <td>${news.newsPosttime?string('yyyy-MM-dd HH:ss')}</td>
 				        </tr>
 				</#list>

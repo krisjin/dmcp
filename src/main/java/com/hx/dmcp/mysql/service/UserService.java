@@ -1,12 +1,12 @@
-package com.hx.dmcp.service;
+package com.hx.dmcp.mysql.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hx.dmcp.dao.UserDao;
-import com.hx.dmcp.entity.User;
+import com.hx.dmcp.mysql.dao.UserDao;
+import com.hx.dmcp.mysql.entity.User;
 import com.hx.dmcp.util.MD5Util;
 import com.hx.dmcp.util.Pagination;
 

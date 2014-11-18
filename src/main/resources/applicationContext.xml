@@ -157,7 +157,7 @@
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="annotationClass" value="org.springframework.stereotype.Repository" />
-		<property name="basePackage" value="com.hx.dmcp.dao" />
+		<property name="basePackage" value="com.hx.dmcp.mysql.dao" />
 	</bean>
 
 </beans>

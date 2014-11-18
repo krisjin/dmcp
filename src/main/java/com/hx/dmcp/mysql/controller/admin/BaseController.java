@@ -1,4 +1,4 @@
-package com.hx.dmcp.controller.admin;
+package com.hx.dmcp.mysql.controller.admin;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.hx.dmcp.constant.SystemConstant;
-import com.hx.dmcp.entity.User;
 import com.hx.dmcp.exception.ControllerValidateException;
-import com.hx.dmcp.service.UserService;
+import com.hx.dmcp.mysql.entity.User;
+import com.hx.dmcp.mysql.service.UserService;
 import com.hx.dmcp.util.JsonUtil;
 
 /**

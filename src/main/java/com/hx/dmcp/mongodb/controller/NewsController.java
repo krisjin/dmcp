@@ -1,4 +1,4 @@
-package com.hx.dmcp.controller.admin;
+package com.hx.dmcp.mongodb.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.common.base.Strings;
 import com.hx.dmcp.mongodb.entity.News;
-import com.hx.dmcp.service.NewsService;
+import com.hx.dmcp.mongodb.service.NewsService;
 import com.hx.dmcp.util.DateUtil;
 import com.hx.dmcp.util.Pagination;
 
@@ -25,17 +25,17 @@ import com.hx.dmcp.util.Pagination;
  * @author krisjin
  * @date 2014-11-5
  */
-@Controller
+@Controller("newsConrollerMongoDB")
 @Scope("prototype")
 @RequestMapping(value = "/admin/news")
 public class NewsController {
 
 	@Autowired
-	private NewsService newsSerivce;
+	private NewsService newsServiceMongoDB;
 
 	@RequestMapping(value = "/detail.htm", method = RequestMethod.GET)
 	public String getNews(@RequestParam(value = "id") String id, ModelMap model) {
-		News news = newsSerivce.getNewsById(id);
+		News news = newsServiceMongoDB.getNewsById(id);
 		model.put("news", news);
 		return "page/news/newsDetail";
 	}
@@ -48,12 +48,12 @@ public class NewsController {
 		page.setCurrentPageSize(p);
 		page.setPerPageRecords(15);
 		List<News> news = null;
-		page.setTotalRecords(newsSerivce.getCountsNews());
+		page.setTotalRecords(newsServiceMongoDB.getCountsNews());
 
 		if (Strings.isNullOrEmpty(newsPosttime)) {
-			news = newsSerivce.findNewsWithPage(page, null);
+			news = newsServiceMongoDB.findNewsWithPage(page, null);
 		} else {
-			news = newsSerivce.findNewsWithPage(page, newsPosttime);
+			news = newsServiceMongoDB.findNewsWithPage(page, newsPosttime);
 		}
 
 		page.setData(news);
@@ -73,7 +73,7 @@ public class NewsController {
 	public String getInflationNewsData(@RequestParam(value = "startDate", defaultValue ="") String startDate,
 			@RequestParam(value = "endDate", defaultValue = "") String endDate,ModelMap model) {
 		
-		List<News> newsList = newsSerivce.findInflationNewsData(startDate, endDate);
+		List<News> newsList = newsServiceMongoDB.findInflationNewsData(startDate, endDate);
 		model.put("newsList", newsList);
 		return "page/inflation/inflation";
 	}
@@ -85,11 +85,11 @@ public class NewsController {
 	}
 
 	public NewsService getNewsSerivce() {
-		return newsSerivce;
+		return newsServiceMongoDB;
 	}
 
 	public void setNewsSerivce(NewsService newsSerivce) {
-		this.newsSerivce = newsSerivce;
+		this.newsServiceMongoDB = newsSerivce;
 	}
 
 }

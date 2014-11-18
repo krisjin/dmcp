@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.hx.dmcp.constant.SystemConstant;
-import com.hx.dmcp.entity.User;
+import com.hx.dmcp.mysql.entity.User;
 
 /**
  * TODO 后台登陆拦截

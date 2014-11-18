@@ -1,4 +1,4 @@
-package com.hx.dmcp.entity;
+package com.hx.dmcp.mysql.entity;
 
 import java.util.Date;
 

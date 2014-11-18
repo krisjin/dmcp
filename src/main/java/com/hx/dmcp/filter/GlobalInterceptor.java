@@ -8,7 +8,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hx.dmcp.constant.SystemConstant;
-import com.hx.dmcp.entity.User;
+import com.hx.dmcp.mysql.entity.User;
 import com.hx.dmcp.util.HttpUtils;
 
 @Component

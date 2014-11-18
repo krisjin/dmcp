@@ -1,15 +1,10 @@
-package com.hx.dmcp.mongodb.entity;
+package com.hx.dmcp.mysql.entity;
 
 import java.util.Date;
 
-import org.springframework.data.annotation.Id;
-
 public class News {
 
-	@Id
-	private String _id;
-
-	private int id;
+	private long id;
 
 	private String newsTitle;
 
@@ -26,11 +21,12 @@ public class News {
 	private String newsContent;
 	
 	
-	public int getId() {
+
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -81,9 +77,9 @@ public class News {
 	public void setNewsPosttime(Date newsPosttime) {
 		this.newsPosttime = newsPosttime;
 	}
+	
+	
 
-	
-	
 	public String getNewsContent() {
 		return newsContent;
 	}
@@ -94,7 +90,7 @@ public class News {
 
 	@Override
 	public String toString() {
-		StringBuilder sb =new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 		return sb.append("News:").append("{id:").append(this.id).append(",newsTitle:").append(this.newsTitle).append("}").toString();
 	}
 }

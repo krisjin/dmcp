@@ -1,4 +1,4 @@
-package com.hx.dmcp.controller.admin;
+package com.hx.dmcp.mysql.controller.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

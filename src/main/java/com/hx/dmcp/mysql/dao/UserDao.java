@@ -1,11 +1,11 @@
-package com.hx.dmcp.dao;
+package com.hx.dmcp.mysql.dao;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import com.hx.dmcp.entity.User;
+import com.hx.dmcp.mysql.entity.User;
 
 /**
  * @author krisjin

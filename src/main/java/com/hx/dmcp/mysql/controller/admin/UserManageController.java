@@ -1,4 +1,4 @@
-package com.hx.dmcp.controller.admin;
+package com.hx.dmcp.mysql.controller.admin;
 
 import java.util.Date;
 
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hx.dmcp.entity.User;
 import com.hx.dmcp.exception.ControllerValidateException;
+import com.hx.dmcp.mysql.entity.User;
 import com.hx.dmcp.util.JsonUtil;
 import com.hx.dmcp.util.MD5Util;
 import com.hx.dmcp.util.Pagination;

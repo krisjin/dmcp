@@ -1,4 +1,4 @@
-package com.hx.dmcp.dao;
+package com.hx.dmcp.mysql.dao;
 
 import java.util.List;
 

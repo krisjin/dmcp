@@ -18,7 +18,7 @@ import com.hx.dmcp.util.Pagination;
  * @author krisjin
  * @date 2014-11-6
  */
-@Repository
+@Repository("newsDaoMongoDB")
 public class NewsDao extends BaseDao<News> {
 
 	public News getNewsById(String id) {

@@ -1,10 +1,10 @@
-package com.hx.dmcp.controller;
+package com.hx.dmcp.mysql.controller;
 
 import com.hx.dmcp.constant.SystemConstant;
 import com.hx.dmcp.constant.ValidateInfoConstant;
-import com.hx.dmcp.controller.admin.BaseController;
-import com.hx.dmcp.entity.User;
-import com.hx.dmcp.service.UserService;
+import com.hx.dmcp.mysql.controller.admin.BaseController;
+import com.hx.dmcp.mysql.entity.User;
+import com.hx.dmcp.mysql.service.UserService;
 import com.hx.dmcp.util.HttpUtils;
 import com.hx.dmcp.util.JsonUtil;
 import com.hx.dmcp.util.MD5Util;
