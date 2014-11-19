@@ -35,5 +35,17 @@
 	<select id="getNewsById" parameterType="String" resultType="com.hx.dmcp.mysql.entity.News">
 		select * from news where id in (#{id})
 	</select>
+	
+	<resultMap type="com.hx.dmcp.mysql.entity.News" id="newsMap">
+		<result property="newsTitle" column="newsTitle"/>
+		<result property="newsContent" column="newsContent"/>
+		<result property="newsPosttime" column="newsPosttime"/>
+	</resultMap>
 
+	<select id="getInflationNews"  parameterType="String" resultType="com.hx.dmcp.mysql.entity.News">
+		select n.newsTitle,n.newsContent,n.newsPosttime from news n
+		where date_format(n.newsPosttime, "%Y-%m-%d")  <![CDATA[ >= ]]> date_format(#{startDate},"%Y-%m-%d")
+		 and date_format(n.newsPosttime, "%Y-%m-%d")  <![CDATA[ <= ]]> date_format(#{endDate},"%Y-%m-%d")
+	
+	</select>
 </mapper>  

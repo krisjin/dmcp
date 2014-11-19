@@ -1,5 +1,8 @@
 package com.hx.dmcp.mysql.controller.admin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -37,4 +40,22 @@ public class NewsController {
 		return "page/news/newsDetail";
 	}
 
+	@RequestMapping(value = "/inflation.htm", method = RequestMethod.GET)
+	public String inflationStatistics(ModelMap model){
+		List<News> newsList =new ArrayList<News>();
+		model.put("newsList", newsList);
+		return "page/inflation/inflation";
+	}
+	
+	@RequestMapping(value = "/inflation/chart.htm", method = RequestMethod.POST)
+	public String inflationStatisticsChart(@RequestParam(value="startDate") String startDate,@RequestParam(value="endDate") String endDate,ModelMap model){
+		List<News> newsMap =newsService.getInfationNews(startDate, endDate);
+		
+		model.put("newsList", newsMap);
+		return "page/inflation/inflation";
+	}
+	
+	
+	
+	
 }
