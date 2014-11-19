@@ -12,7 +12,7 @@
 		            </div>
 		            
 		            <div class="panel-body" >
-		            <form action="${basePath}/admin/news/inflation.htm" method="post">
+		            <form action="${basePath}/admin/ms/inflation/chart.htm" method="post">
 					            开始时间:<input size="16" type="text"  readonly class="form_datetime" name="startDate">&nbsp;&nbsp;&nbsp;
 					            结束时间:<input size="16" type="text"  readonly class="form_datetime" name="endDate">
 					      &nbsp;&nbsp;&nbsp;
@@ -56,6 +56,7 @@
 	
     $('.form_datetime').datetimepicker({
         //language:  'fr',
+        format:"yyyy-mm-dd",
         weekStart: 1,
         todayBtn:  1,
 		autoclose: 1,

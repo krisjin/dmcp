@@ -1,6 +1,7 @@
 package com.hx.dmcp.mysql.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,5 +54,11 @@ public class NewsService {
 		page.setTotalRecords(this.getTotalNewsCounts());
 		return page;
 	}
-
+	
+	
+	public List<News> getInfationNews(String startDate,String endDate){
+		return newsDao.getInflationNews(startDate, endDate);
+		
+	}
+	
 }
