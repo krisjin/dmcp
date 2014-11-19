@@ -44,7 +44,7 @@ public class NewsController {
 	public String inflationStatistics(ModelMap model){
 		List<News> newsList =new ArrayList<News>();
 		model.put("newsList", newsList);
-		return "page/inflation/inflation";
+		return "page/inflation/inflation-mysql";
 	}
 	
 	@RequestMapping(value = "/inflation/chart.htm", method = RequestMethod.POST)
@@ -52,7 +52,7 @@ public class NewsController {
 		List<News> newsMap =newsService.getInfationNews(startDate, endDate);
 		
 		model.put("newsList", newsMap);
-		return "page/inflation/inflation";
+		return "page/inflation/inflation-mysql";
 	}
 	
 	
