@@ -3,6 +3,10 @@ package com.hx.dmcp.mysql.controller.admin;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import net.sf.json.JSONArray;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -41,9 +45,14 @@ public class NewsController {
 	}
 
 	@RequestMapping(value = "/inflation.htm", method = RequestMethod.GET)
-	public String inflationStatistics(ModelMap model){
+	public String inflationStatistics(ModelMap model,HttpServletRequest request){
 		List<News> newsList =new ArrayList<News>();
 		model.put("newsList", newsList);
+//		model.put("cate", getCategoryJSONArray());
+//		model.put("vals", getValueData());
+		request.setAttribute("cate", getCategoryJSONArray());
+		request.setAttribute("vals", getValueData());
+		request.setAttribute("aa", "eee");
 		return "page/inflation/inflation-mysql";
 	}
 	
@@ -51,10 +60,28 @@ public class NewsController {
 	public String inflationStatisticsChart(@RequestParam(value="startDate") String startDate,@RequestParam(value="endDate") String endDate,ModelMap model){
 		List<News> newsMap =newsService.getInfationNews(startDate, endDate);
 		
+		model.put("category", getCategoryJSONArray());
+		model.put("value", getValueData());
+		
 		model.put("newsList", newsMap);
 		return "page/inflation/inflation-mysql";
 	}
 	
+	public JSONArray getCategoryJSONArray(){
+		List<Object> cates=new ArrayList<Object>();
+		for(int i=1;i<30;i++){
+			cates.add("9."+i);
+		}
+		return JSONArray.fromObject(cates);
+	}
+
+	public JSONArray getValueData(){
+		List<Integer> nums=new ArrayList<Integer>();
+		for(int i=1;i<30;i++){
+			nums.add(10+i);
+		}
+		return JSONArray.fromObject(nums);
+	}
 	
 	
 	

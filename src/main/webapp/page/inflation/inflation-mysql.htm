@@ -4,7 +4,6 @@
     <div id="sidebar">
   		<#include "/page/sidebar.htm">
     </div>
-    
     <div id="content">
 		<div class="panel panel-primary">
 		            <div class="panel-heading">
@@ -44,9 +43,81 @@
 				      </tbody>
 				    </table>
 		            </div>
-		            
-
 		 </div>
+		 
+	  <div id="main" style="height:500px;border:1px solid #ccc;padding:10px;width: auto;"></div>
+	  <#assign ct=cate?eval />
+	  <script type="text/javascript">
+    // Step:3 conifg ECharts's path, link to echarts.js from current page.
+    // Step:3 为模块加载器配置echarts的路径，从当前页面链接到echarts.js，定义所需图表路径
+    require.config({
+        paths: {
+            echarts: '${basePath}/page/echarts/js'
+        }
+    });
+    
+    // Step:4 require echarts and use it in the callback.
+    // Step:4 动态加载echarts然后在回调函数中开始使用，注意保持按需加载结构定义图表路径
+    require(
+        [
+            'echarts',
+            'echarts/chart/bar',
+            'echarts/chart/line',
+            'echarts/chart/map'
+        ],
+        function (ec) {
+            //--- 折柱 ---
+            var myChart = ec.init(document.getElementById('main'));
+            
+            var categoryData=${ct};
+            //alert(${cate});
+            //var valueData=${vals};
+            
+            
+            myChart.setOption({
+                tooltip : {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data:['每天舆情指数']
+                },
+                toolbox: {
+                    show : true,
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: true},
+                        magicType : {show: true, type: ['line', 'bar']},
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                calculable : true,
+                xAxis : [
+                    {
+                        type : 'category',
+                        data : categoryData
+                    }
+                ],
+                yAxis : [
+                    {
+                        type : 'value',
+                        splitArea : {show : true}
+                    }
+                ],
+                series : [
+                    {
+                        name:'通货膨胀舆情指数',
+                        type:'bar',
+                        data:valueData
+                    }
+                ]
+            });
+            
+        
+        }
+    );
+    </script>
+		 
      </div>
    </div>
 </div>
