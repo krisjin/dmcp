@@ -9,7 +9,6 @@
 		            <div class="panel-heading">
 		              <h3 class="panel-title">通胀舆情指数查询</h3>
 		            </div>
-		            
 		            <div class="panel-body" >
 		            <form action="${basePath}/admin/ms/inflation/chart.htm" method="post">
 					            开始时间:<input size="16" type="text"  readonly class="form_datetime" name="startDate">&nbsp;&nbsp;&nbsp;
@@ -46,7 +45,7 @@
 		 </div>
 		 
 	  <div id="main" style="height:500px;border:1px solid #ccc;padding:10px;width: auto;"></div>
-	  <#assign ct=cate?eval />
+	  
 	  <script type="text/javascript">
     // Step:3 conifg ECharts's path, link to echarts.js from current page.
     // Step:3 为模块加载器配置echarts的路径，从当前页面链接到echarts.js，定义所需图表路径
@@ -68,12 +67,8 @@
         function (ec) {
             //--- 折柱 ---
             var myChart = ec.init(document.getElementById('main'));
-            
-            var categoryData=${ct};
-            //alert(${cate});
-            //var valueData=${vals};
-            
-            
+            var categoryData=${cate};
+            var valueData=${vals};
             myChart.setOption({
                 tooltip : {
                     trigger: 'axis'

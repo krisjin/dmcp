@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.hx.dmcp.mysql.entity.News;
 import com.hx.dmcp.mysql.service.NewsService;
@@ -45,15 +46,17 @@ public class NewsController {
 	}
 
 	@RequestMapping(value = "/inflation.htm", method = RequestMethod.GET)
-	public String inflationStatistics(ModelMap model,HttpServletRequest request){
+	public ModelAndView inflationStatistics(ModelMap model,HttpServletRequest request){
+		ModelAndView mav =new ModelAndView();
+		
 		List<News> newsList =new ArrayList<News>();
 		model.put("newsList", newsList);
-//		model.put("cate", getCategoryJSONArray());
-//		model.put("vals", getValueData());
-		request.setAttribute("cate", getCategoryJSONArray());
-		request.setAttribute("vals", getValueData());
-		request.setAttribute("aa", "eee");
-		return "page/inflation/inflation-mysql";
+		
+		mav.addObject("cate", getCategoryJSONArray().toString());
+		mav.addObject("vals", getValueData().toString());
+		mav.setViewName("page/inflation/inflation-mysql");
+		
+		return mav;
 	}
 	
 	@RequestMapping(value = "/inflation/chart.htm", method = RequestMethod.POST)
