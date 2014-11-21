@@ -70,6 +70,25 @@ public class NewsController {
 		return "page/inflation/inflation-mysql";
 	}
 	
+	@RequestMapping(value="/positivenegative.htm")
+	public String statPositivNegative(@RequestParam(value="startDate") String startDate,@RequestParam(value="endDate") String endDate,ModelMap model){
+		List<News> newsMap =newsService.getInfationNews(startDate, endDate);
+		
+		
+		return null;
+	}
+	
+	@RequestMapping(value="/positivenegative.htm")
+	public String statPositivNegativeChart(@RequestParam(value="startDate") String startDate,@RequestParam(value="endDate") String endDate,ModelMap model){
+		List<News> newsMap =newsService.getInfationNews(startDate, endDate);
+		
+		
+		return "";
+	}
+	
+	
+	
+	
 	public JSONArray getCategoryJSONArray(){
 		List<Object> cates=new ArrayList<Object>();
 		for(int i=1;i<30;i++){
