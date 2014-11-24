@@ -12,9 +12,9 @@ public interface KeywordDao {
 
 	public void updateKeyword(Keyword keyword);
 
-	public void deleteKeyword(@Param("id") long id);
+	public void deleteKeyword(@Param("id") int id);
 
-	public List<Keyword> getKeywordById(@Param("id") String id);
+	public Keyword getKeywordById(@Param("id") int id);
 
 	public List<Keyword> getKeywordWithPage(@Param("offset") long offset, @Param("rows") long rows);
 

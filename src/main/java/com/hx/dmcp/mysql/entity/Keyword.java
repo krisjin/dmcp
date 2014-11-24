@@ -12,7 +12,7 @@ public class Keyword {
 
 	private int status;
 
-	private int weights;
+	private int weight;
 
 	private String value;
 
@@ -40,12 +40,12 @@ public class Keyword {
 		this.status = status;
 	}
 
-	public int getWeights() {
-		return weights;
+	public int getWeight() {
+		return weight;
 	}
 
-	public void setWeights(int weights) {
-		this.weights = weights;
+	public void setWeight(int weight) {
+		this.weight = weight;
 	}
 
 	public String getValue() {
