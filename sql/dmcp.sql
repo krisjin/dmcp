@@ -173,6 +173,16 @@ AUTO_INCREMENT=1
 
 ;
 
+DROP TABLE IF EXISTS `keyword`;
+CREATE TABLE `keyword` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `value` text,
+  `stauts` int(11) DEFAULT NULL,
+  `weight` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- ----------------------------
 -- Auto increment value for `funcgroup_func`
 -- ----------------------------
