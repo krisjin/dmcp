@@ -14,7 +14,7 @@ public class Keyword {
 
 	private int weight;
 
-	private String value;
+	private String content;
 
 	public int getId() {
 		return id;
@@ -48,12 +48,12 @@ public class Keyword {
 		this.weight = weight;
 	}
 
-	public String getValue() {
-		return value;
+	public String getContent() {
+		return content;
 	}
 
-	public void setValue(String value) {
-		this.value = value;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 }

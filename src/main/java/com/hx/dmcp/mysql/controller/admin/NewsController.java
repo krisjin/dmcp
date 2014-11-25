@@ -78,13 +78,13 @@ public class NewsController {
 		return null;
 	}
 	
-	@RequestMapping(value="/positivenegative.htm")
-	public String statPositivNegativeChart(@RequestParam(value="startDate") String startDate,@RequestParam(value="endDate") String endDate,ModelMap model){
-		List<News> newsMap =newsService.getInfationNews(startDate, endDate);
-		
-		
-		return "";
-	}
+	//@RequestMapping(value="/positivenegative.htm")
+//	public String statPositivNegativeChart(@RequestParam(value="startDate") String startDate,@RequestParam(value="endDate") String endDate,ModelMap model){
+//		List<News> newsMap =newsService.getInfationNews(startDate, endDate);
+//		
+//		
+//		return "";
+//	}
 	
 	
 	

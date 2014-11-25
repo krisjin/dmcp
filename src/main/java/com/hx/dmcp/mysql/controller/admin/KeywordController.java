@@ -18,7 +18,7 @@ import com.hx.dmcp.util.Pagination;
 @Controller
 @RequestMapping("/admin/ms")
 public class KeywordController {
-	
+
 	@Autowired
 	private KeywordService keywordService;
 
@@ -35,12 +35,29 @@ public class KeywordController {
 		model.put("keyword", keyword);
 		return "page/keyword/keywordDetail";
 	}
-	
-	@RequestMapping(value = "/keyword/update.html", method = RequestMethod.GET)
-	public String updateKeyword(@RequestParam(value = "id", defaultValue = "0") int id, ModelMap model){
-		Keyword keyword =keywordService.getKeywordById(id);
+
+	@RequestMapping(value = "/keyword/update.htm", method = RequestMethod.GET)
+	public String updateKeyword(@RequestParam(value = "id", defaultValue = "0") int id, ModelMap model) {
+		Keyword keyword = keywordService.getKeywordById(id);
 		model.put("keyword", keyword);
-		return "page/keyword/keywordDetail";
+		return "page/keyword/updateKeyword";
 	}
+
+	@RequestMapping(value = "/keyword/add.htm", method = RequestMethod.GET)
+	public String addKeyword() {
+
+		return "page/keyword/addKeyword";
+	}
+	
+	@RequestMapping(value = "/keyword/save.htm", method = RequestMethod.POST)
+	public String saveKeyword(@RequestParam(value = "name", defaultValue = "") String name,
+			@RequestParam(value = "content") String content, ModelMap model) {
+		Keyword keyword = new Keyword();
+		keyword.setName(name);
+		keyword.setContent(content);
+		keywordService.addKeyword(keyword);
+		return "redirect:/admin/ms/keyword.htm";
+	}
+
 	
 }

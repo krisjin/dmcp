@@ -17,25 +17,24 @@
 				        <tr>
 				          <th>#</th>
 				          <th>关键词名称</th>
-				          <th>关键词值</th>
+				          <th>关键词内容</th>
 				        </tr>
 				      </thead>
 				      <tbody>
-				<#assign newsList=page.getData()>
-				<#list newsList as news>
+				<#assign keywordList=page.getData()>
+				<#list keywordList as keyword>
 				        <tr>
-				         
+				        <td><input type="checkbox" value="${keyword.id}" name="id"></td>
 				          <td>
-				          <a href="${basePath}/admin/ms/news/${news.id}.htm">
-				          <#if news.newsTitle?length gt 40>
-								${news.newsTitle[0..40]}
-								<#else>
-								${news.newsTitle}
-								</#if>
-						 </a>
+					          <a href="${basePath}/admin/ms/keyword/${keyword.id}.htm">${keyword.name}</a>
 				          </td>
-				          <td>${news.newsMedia}</td>
-				          <td>${news.newsPosttime?string('yyyy-MM-dd HH:ss')}</td>
+				          <td title="${keyword.content}">
+				         	<#if keyword.content?length gt 40>
+				         		${keyword.content[0..40]}
+				         	<#else>
+				         	 ${keyword.content}
+				         	 </#if>
+				          </td>
 				        </tr>
 				</#list>
 				      </tbody>
@@ -46,9 +45,9 @@
 		             <div class="container-fluid">
 		             <div class="row show-grid" style="height: 70px;">
 					      <div class="col-xs-4" style="margin-top: 20px;">
-				             <span> <a class="btn btn-success" href="${basePath}/admin/user/addUser.htm" >新增用户</a></span>
-				             <span> <a class="btn btn-warning" href="#" onclick="updateUser();">修改用户</a></span>
-				             <span> <a class="btn btn-danger" href="#" onclick="deleteUser();" >删除用户</a></span>
+				             <span> <a class="btn btn-success" href="${basePath}/admin/ms/keyword/add.htm" >新增</a></span>
+				             <span> <a class="btn btn-warning" href="#" onclick="updateUser();">修改</a></span>
+				             <span> <a class="btn btn-danger" href="#" onclick="deleteUser();" >删除</a></span>
 					      </div>
 					      <div class="col-xs-8" style="margin-top: 0px;">
 		             		${page.getPaginationStr()}

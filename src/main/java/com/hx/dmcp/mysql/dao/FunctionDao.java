@@ -3,9 +3,9 @@ package com.hx.dmcp.mysql.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import com.hx.dmcp.mysql.entity.Function;
-
 public interface FunctionDao {
 	
 	public void addFunction(Function function);

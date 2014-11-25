@@ -3,7 +3,7 @@ package com.hx.dmcp.mysql.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-
+import org.springframework.stereotype.Repository;
 public interface FunctionGroup {
 	public void addFunctionGroup(FunctionGroup fc);
 	
