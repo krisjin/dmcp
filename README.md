@@ -14,5 +14,5 @@ DMCP数据挖掘计算平台
 * bootstrap3.0.2
 * freemarker
 * guava1.8
-
+* echart
 
