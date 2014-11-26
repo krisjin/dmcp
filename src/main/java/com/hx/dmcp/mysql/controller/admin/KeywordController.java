@@ -36,12 +36,6 @@ public class KeywordController {
 		return "page/keyword/keywordDetail";
 	}
 
-	@RequestMapping(value = "/keyword/update.htm", method = RequestMethod.GET)
-	public String updateKeyword(@RequestParam(value = "id", defaultValue = "0") int id, ModelMap model) {
-		Keyword keyword = keywordService.getKeywordById(id);
-		model.put("keyword", keyword);
-		return "page/keyword/updateKeyword";
-	}
 
 	@RequestMapping(value = "/keyword/add.htm", method = RequestMethod.GET)
 	public String addKeyword() {
@@ -59,5 +53,24 @@ public class KeywordController {
 		return "redirect:/admin/ms/keyword.htm";
 	}
 
+	@RequestMapping(value = "/keyword/updateKeyword.htm", method = RequestMethod.GET)
+	public String updateKeyword(@RequestParam(value = "id", defaultValue = "0") int id, ModelMap model) {
+		Keyword keyword = keywordService.getKeywordById(id);
+		model.put("keyword", keyword);
+		return "page/keyword/updateKeyword";
+	}
+	
+	@RequestMapping(value = "/keyword/updateSave.htm", method = RequestMethod.POST)
+	public String updateSaveKeyword(@RequestParam(value="id") int id,@RequestParam(value = "name", defaultValue = "") String name,
+			@RequestParam(value = "content") String content, ModelMap model) {
+		Keyword keyword = new Keyword();
+		keyword.setId(id);
+		keyword.setName(name);
+		keyword.setContent(content);
+		keywordService.updateKeyword(keyword);
+		return "redirect:/admin/ms/keyword.htm";
+	}
+	
+	
 	
 }

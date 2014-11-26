@@ -46,8 +46,8 @@
 		             <div class="row show-grid" style="height: 70px;">
 					      <div class="col-xs-4" style="margin-top: 20px;">
 				             <span> <a class="btn btn-success" href="${basePath}/admin/ms/keyword/add.htm" >新增</a></span>
-				             <span> <a class="btn btn-warning" href="#" onclick="updateUser();">修改</a></span>
-				             <span> <a class="btn btn-danger" href="#" onclick="deleteUser();" >删除</a></span>
+				             <span> <a class="btn btn-warning" href="#" onclick="updateKeyword();">修改</a></span>
+<!-- 				             <span> <a class="btn btn-danger" href="#" onclick="deleteUser();" >删除</a></span> -->
 					      </div>
 					      <div class="col-xs-8" style="margin-top: 0px;">
 		             		${page.getPaginationStr()}
@@ -86,9 +86,9 @@
 	}
 	
 	
-	function updateUser(){
+	function updateKeyword(){
 		var ids=new Array();
-		$('input[name="userId"]:checked').each(function(){
+		$('input[name="id"]:checked').each(function(){
 			ids.push($(this).val());
 		});
 
@@ -97,7 +97,7 @@
 			return false;
 		}
 		
-		window.location.href="${basePath}/admin/user/updateUser.htm?userId="+ids[0];
+		window.location.href="${basePath}/admin/ms/keyword/updateKeyword.htm?id="+ids[0];
 		
 	}
 </script>

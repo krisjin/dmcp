@@ -13,7 +13,7 @@
 	</delete>
 	
 	<update id="updateKeyword" parameterType="com.hx.dmcp.mysql.entity.Keyword">
-		update keyword set name=#{name}, value=#{value} where id=#{id}
+		update keyword set name=#{name}, content=#{content} where id=#{id}
 	</update>
 		
 	<select id="getKeywordWithPage" resultType="com.hx.dmcp.mysql.entity.Keyword">

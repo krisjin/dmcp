@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import net.sf.json.JSONArray;
 
+import org.ansj.app.summary.SummaryComputer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hx.dmcp.mysql.entity.News;
 import com.hx.dmcp.mysql.service.NewsService;
+import com.hx.dmcp.util.HtmlUtil;
 import com.hx.dmcp.util.Pagination;
 
 /**
@@ -34,6 +36,15 @@ public class NewsController {
 	@RequestMapping(value = "/news.htm", method = RequestMethod.GET)
 	public String listNews(@RequestParam(value = "p", defaultValue = "1") int p, ModelMap model) {
 		Pagination<News> page = newsService.getNewsWithPage(p, 15);
+		List<News> newsList = page.getData();
+		for(News news:newsList){
+			SummaryComputer sc = new SummaryComputer(200, news.getNewsTitle(), HtmlUtil.removeAllHtmlTag(news.getNewsContent()));
+			String summary =sc.toSummary().getSummary();
+			news.setSummary(summary);
+		}
+		
+		page.setData(newsList);
+		
 		model.put("page", page);
 		return "page/news/listNews";
 	}

@@ -22,10 +22,11 @@ public class News {
 	private int newsType;
 
 	private Date newsPosttime;
-	
+
 	private String newsContent;
-	
-	
+
+	private String summary;
+
 	public int getId() {
 		return id;
 	}
@@ -82,8 +83,6 @@ public class News {
 		this.newsPosttime = newsPosttime;
 	}
 
-	
-	
 	public String getNewsContent() {
 		return newsContent;
 	}
@@ -92,9 +91,17 @@ public class News {
 		this.newsContent = newsContent;
 	}
 
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+
 	@Override
 	public String toString() {
-		StringBuilder sb =new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 		return sb.append("News:").append("{id:").append(this.id).append(",newsTitle:").append(this.newsTitle).append("}").toString();
 	}
 }

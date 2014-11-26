@@ -20,6 +20,7 @@ public class News {
 	
 	private String newsContent;
 	
+	private String summary;
 	
 
 	public long getId() {
@@ -86,6 +87,16 @@ public class News {
 
 	public void setNewsContent(String newsContent) {
 		this.newsContent = newsContent;
+	}
+
+	
+	
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
 	}
 
 	@Override
