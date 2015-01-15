@@ -39,7 +39,7 @@ public class TechArticleController {
 			for (TechArticle art : articleList) {
 				List<String> summaryList = TextRankSummary.getTopSentenceList(HtmlUtil.removeAllHtmlTag(art.getArticleContent()), 5);
 				String str = Joiner.on("，").join(summaryList);
-//				art.setArticleSummary(str.replaceAll("\\s*", "").replaceAll("　　", "") + "。");
+				art.setArticleSummary(str.replaceAll("\\s*", "").replaceAll("　　", "") + "。");
 			}
 		}
 
@@ -49,7 +49,7 @@ public class TechArticleController {
 		return "page/article/listArticle";
 	}
 
-	@RequestMapping(value = "/article/{id}.htm", method = RequestMethod.GET)
+	@RequestMapping(value = "/article/{articleId}.htm", method = RequestMethod.GET)
 	public String newsDetail(@PathVariable("articleId") long articleId, ModelMap model) {
 		TechArticle art = techArticleService.getTechArticleById(articleId);
 		model.put("article", art);

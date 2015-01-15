@@ -26,7 +26,7 @@ public class TechArticle {
 
 	private int articleReadNum;
 
-//	private String articleSummary;
+	private String articleSummary;
 	
 	public long getArticleId() {
 		return articleId;
@@ -100,13 +100,13 @@ public class TechArticle {
 		this.articleReadNum = articleReadNum;
 	}
 
-//	public String getArticleSummary() {
-//		return articleSummary;
-//	}
-//
-//	public void setArticleSummary(String articleSummary) {
-//		this.articleSummary = articleSummary;
-//	}
+	public String getArticleSummary() {
+		return articleSummary;
+	}
+
+	public void setArticleSummary(String articleSummary) {
+		this.articleSummary = articleSummary;
+	}
 
 	
 }
