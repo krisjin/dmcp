@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.snails.common.algorithm.summary.TextRankSummary;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -15,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 import com.hx.dmcp.mongodb.entity.News;
 import com.hx.dmcp.mongodb.service.NewsService;
 import com.hx.dmcp.util.DateUtil;
+import com.hx.dmcp.util.HtmlUtil;
 import com.hx.dmcp.util.Pagination;
 
 /**
@@ -56,6 +60,11 @@ public class NewsController {
 			news = newsServiceMongoDB.findNewsWithPage(page, newsPosttime);
 		}
 
+		for (News n : news) {
+			List<String> summaryList = TextRankSummary.getTopSentenceList(HtmlUtil.removeAllHtmlTag(n.getNewsContent()), 5);
+			String str =Joiner.on("，").join(summaryList);
+			n.setSummary(str.replaceAll("\\s*", "").replaceAll("　　", "")+"。");
+		}
 		page.setData(news);
 		Map args = new HashMap();
 
